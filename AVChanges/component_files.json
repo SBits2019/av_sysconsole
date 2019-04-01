@@ -1,5 +1,6 @@
     {
         "udcs": ["cloudtv.conf", "udc.xml"],
         "scalermgrs": ["scaler-mgr.xml", "scales.xml", "cloudtv.conf", "topology.xml"],
-        "stitchers": ["stitcher.xml", "cloudtv.conf", "udc.xml", "compositor.xml"]
+        "stitchers": ["stitcher.xml", "cloudtv.conf", "udc.xml", "compositor.xml"],
+        "csm": ["csm.xml", "devices.xml", "programs.xml"]
         }
