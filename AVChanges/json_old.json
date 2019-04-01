@@ -1,0 +1,196 @@
+{
+  "title": "Release migration",
+  "description": "Identifies the changes in configurations of Active TV Releases",
+  "product": {
+    "name": "CloudTv",
+    "base_config_version": "2.11",
+    "new_config_version": "2.13",
+    "summary_of_changes": "1.-Simulcrypt support for IP delivery 2.-Scale grouping 3.-Data Collector improvements 4.-reporting pipeline improvements 5.-RFB-TV plugin support for generating key repeatevents 6.-setting for control IP ofSession Manager member 7.-handling of videocapabilities of clients 8.-subscription logic from StreamingEngine to Scaler 9.-DataCollector HTTPS and proxy support",
+    "components": [
+      {
+        "name": "scaler",
+        "config_files": [
+          {
+            "file_name": "scaler-mgr.xml",
+            "file_path": "/etc/opt/scaler-mgr.xml",
+            "file_type": "mandatory",
+            "file_modification_type": "Added",
+            "attribute_modifications": [
+              {
+                "attribute_name": "groupSelect",
+                "attribute_description": "The scale grouping functionality allows an operator that uses a Scaler cluster in dynamic mode to group the Scaler Nodes.",
+                "value": false,
+                "default": "",
+                "xml_path": "scales/scale/groupSelect",
+                "explanation_text": "This can be used to reduce wasting bandwidth in an operator network when Scaler jobs are only used by a subset of the Stitchers in the deployment.",
+                "modification_type": "Added"
+              }
+            ]
+          },
+          {
+            "file_name": "topology.xml",
+            "file_path": "/etc/opt/scaler/scales.xml",
+            "file_type": "mandatory",
+            "file_modification_type": "Added",
+            "attribute_modifications": [
+              {
+                "attribute_name": "group",
+                "attribute_description": "The scale grouping functionality allows an operator that uses a Scaler cluster in dynamic mode to group the Scaler Nodes.",
+                "value": false,
+                "default": "",
+                "xml_path": "scales/scale/group",
+                "explanation_text": "This can be used to reduce wasting bandwidth in an operator network when Scaler jobs are only used by a subset of the Stitchers in the deployment.",
+                "modification_type": "Added"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "csm",
+        "config_files": [
+          {
+            "file_name": "simulcrypt.xml",
+            "file_path": "/etc/opt/csm/simulcrypt.xml",
+            "file_type": "mandatory",
+            "file_modification_type": "New",
+            "attribute_modifications": [
+              {
+                "attribute_name": "",
+                "attribute_description": "",
+                "value": true,
+                "default": "",
+                "xml_path": "",
+                "explanation_text": "CloudTV now offers support for conditional access systems using the DVB Simulcrypt proto- col for streams delivered over IP.",
+                "modification_type": "New"
+              }
+            ]
+          },
+          {
+            "file_name": "programs.xml",
+            "file_path": "/etc/opt/csm/programs.xml",
+            "file_type": "mandatory",
+            "file_modification_type": "Updated",
+            "attribute_modifications": [
+              {
+                "attribute_name": "encryption",
+                "attribute_description": "",
+                "value": "matchIngest",
+                "default": "",
+                "xml_path": "",
+                "explanation_text": "CloudTV now offers support for conditional access systems using the DVB Simulcrypt proto- col for streams delivered over IP.",
+                "modification_type": "New"
+              }
+            ]
+          },
+          {
+            "file_name": "udc.xml",
+            "file_path": "/etc/opt/udc.xml",
+            "file_type": "mandatory",
+            "file_modification_type": "Replaced",
+            "attribute_modifications": [
+              {
+                "attribute_name": "Local Data Collector",
+                "attribute_description": "Kestrel and the collector are replaced by a local Data Collector running on the Session Manager members and Stitcher",
+                "value": true,
+                "default": "",
+                "xml_path": "/udc/",
+                "explanation_text": "The configuration file /etc/opt/collector.conf is replaced by /etc/opt/udc.xml on Session Manager members and Stitchers To configure the central Data Collector, configure a HTTP Post dispatcher with the Data Collector’s URL.",
+                "modification_type": "Replaced"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file_name": "csm.xml",
+        "file_path": "/etc/opt/csm.xml",
+        "file_type": "mandatory",
+        "file_modification_type": "New",
+        "plugin_details": [
+          {
+            "plugin_name": "RFB-TV",
+            "file_path": "/etc/opt/csm.xml",
+            "modification_type": "New",
+            "plugin_summary": "The RFB-TV plugin has three new options to enable and configure key repeat events.",
+            "plugin_options": [
+              {
+                "plugin_option": "repeatKeyDelay",
+                "Type": "Int",
+                "value": true,
+                "default": 0,
+                "xml_path":"",
+                "required": "",
+                "option_description": "The interval the Session Manager waits after a key down event from the client before starting key repeats. When this interval expires, without having received a new key event, the Session Manager starts generat- ing keyDown events with the key code that was received last, until the maxKeyRepeatDuration is reached or a new key event occurs. Zero (0) dis- ables key repeat behavior. Minimum value is 0, maximum is 1000.",
+                "modification_type": "New"
+              },
+              {
+                "plugin_option": "repeatKeyInterval",
+                "Type": "Int",
+                "value": true,
+                "default": 125,
+                "xml_path":"",
+                "required": "",
+                "option_description": "Interval to issue keyDown messages to the application. Keys are repeated with the specified interval until the client transmits another key event or until the maxKeyRepeatDuration is reached. A value of 0 disables key repeat key repeat behavior. Maximum value is 1000.",
+                "modification_type": "New"
+              },
+              {
+                "plugin_option": "maxKeyRepeatDuration",
+                "Type": "Int",
+                "value": true,
+                "default": 60000,
+                "xml_path":"",
+                "required": "",
+                "option_description": "Maximum duration of key repeat behavior. When this timer expires or the Session Manager receives another key, the Session Manager generates a keyUp event of the key it was repeating and stops repeating. Minimum value is 0, maximum is 300000 (5 minutes).",
+                "modification_type": "New"
+              }
+            ]
+          },
+          {
+            "plugin_name": "SCPPlugin",
+            "file_path": "/etc/opt/csm/",
+            "modification_type": "New",
+            "plugin_summary": "CloudTV now offers support for conditional access systems using the DVB Simulcrypt proto- col for streams delivered over IP"
+          }
+        ]
+      },
+      {
+        "name": "stitcher",
+        "config_files": [
+          {
+            "file_name": "udc.xml",
+            "file_path": "/etc/opt/udc.xml",
+            "file_type": "mandatory",
+            "file_modification_type": "Replaced",
+            "attribute_modifications": [
+              {
+                "attribute_name": "Local Data Collector",
+                "attribute_description": "Kestrel and the collector are replaced by a local Data Collector running on the Session Manager members and Stitcher",
+                "value": false,
+                "default": "",
+                "xml_path": "/udc/",
+                "explanation_text": "The configuration file /etc/opt/collector.conf is replaced by /etc/opt/udc.xml on Session Manager members and Stitchers To configure the central Data Collector, configure a HTTP Post dispatcher with the Data Collector’s URL",
+                "modification_type": "Replaced"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file_name": "...xml",
+        "file_path": "/etc/opt/...xml",
+        "file_type": "mandatory",
+        "file_modification_type": "New",
+        "plugin_details": [
+          {
+          "plugin_name": "PegasusSSP",
+          "file_path": "",
+          "modification_type": "New",
+          "plugin_summary": "The Pegasus VoD plugin can send TSID list or SGID parameters to the VoD server depending on the backend type. In case a proxy is used, it is now possible to specify which service area format the proxy needs"
+          }
+
+        ]
+      }
+    ]
+  }
+}
