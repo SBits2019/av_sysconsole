@@ -1,0 +1,8 @@
+1. Flask based API returns a json config file
+
+2. Depending on the filename/filepath it should
+
+	group all attributes that are modified
+	find exact path of the file
+	find xml path of element in the xml tree (in the file)
+	

@@ -1,0 +1,7 @@
+bin/
+lib/
+pyvenv.cfg
+include/
+.Python
+*.swp
+act_video_overview.txt
