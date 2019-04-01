@@ -29,7 +29,7 @@ def list_components():
     for key, value in data.items():
         comps.append((key, value))
 
-    return str(comps)
+    return jsonify(comps)
 
 
 @app.route('/components/<det_component>')
@@ -38,10 +38,8 @@ def get_comp_attrs(det_component):
     for comp in components:
         for key, value in comp.items():
             if key == 'name' and value == det_component:
-                for c in comp['config_files']:
-                    x.append(c['file_name'])
+                return jsonify([c['file_name'] for c in comp['config_files']])
 
-    return str(x) 
 
     #xml_name = components[0][det_component]
     #if os.path.exists('avchanges/'+xml_name):
