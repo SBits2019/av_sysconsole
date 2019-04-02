@@ -13,7 +13,11 @@
             <li id='comp_list'>{{ comp[0] }}</li>
                     <ul> 
                         {% for i in comp[1] %}
-                            <li><a href="">{{ i }}</a></li>
+                            {% if i in changed_components %}
+                                <li><a href="">{{ i }}</a></li>
+                            {% else %}
+                                <li>{{ i }}</li>
+                            {% endif %}
                         {% endfor %}
                     </ul>
             {% endfor %}
@@ -21,4 +25,4 @@
     </div>
 </div>
 </div>
-    {% endblock %}
+{% endblock %}
