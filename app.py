@@ -58,12 +58,8 @@ def get_configfiles(config_comp):
 
 
 def get_allconfigfiles():
-    x = []
     for comp in components:
-        for key, value in comp.items():
-            [x.append(c['file_name']) for c in comp['config_files']]
-
-    return x
+        return [c['file_name'] for c in comp['config_files']]
 
 
 @app.route('/component_detail')
