@@ -5,17 +5,20 @@
 {% endblock %}
 
 {% block body %}
-<br>
-    <div>
-        <ol>
+<div class='row'>
+    <div class = 'col-sm-4'>
+    <div id='compos'>
+        <ul>
             {% for comp in components %}
-            <li><a href="">{{ comp[0] }}</a></li>
+            <li id='comp_list'>{{ comp[0] }}</li>
                     <ul> 
                         {% for i in comp[1] %}
-                            <li>{{ i }}</li>
+                            <li><a href="">{{ i }}</a></li>
                         {% endfor %}
                     </ul>
             {% endfor %}
-        </ol>
+        </ul>
     </div>
-{% endblock %}
+</div>
+</div>
+    {% endblock %}
