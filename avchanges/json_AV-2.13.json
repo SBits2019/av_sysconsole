@@ -27,7 +27,7 @@
 						"file_name": "topology.xml",
 						"file_path": "/etc/opt/scaler/scales.xml",
 						"file_type": "mandatory",
-						"file_modification_type": "Added",
+                            "file_modification_type": "Added",
 						"attribute_modifications": [{
 							"attribute_name": "group",
 							"attribute_description": "The scale grouping functionality allows an operator that uses a Scaler cluster in dynamic mode to group the Scaler Nodes.",
