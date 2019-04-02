@@ -67,7 +67,7 @@
 							"attribute_description": "",
 							"value": "matchIngest",
 							"default": "",
-							"xml_path": "",
+							"xml_path": "/CloudTVPrograms[1]/program[1]/@encryption",
 							"explanation_text": "CloudTV now offers support for conditional access systems using the DVB Simulcrypt proto- col for streams delivered over IP.",
 							"modification_type": "New"
 						}]

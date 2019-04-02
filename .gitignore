@@ -6,3 +6,4 @@ include/
 *.swp
 act_video_overview.txt
 *.pyc
+__pycache__/
