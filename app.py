@@ -1,5 +1,5 @@
 #!/Users/pankaj/Projects/ActiveVideo/bin/python
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template, url_for
 import json
 import os
 
@@ -10,36 +10,45 @@ with open('avchanges/json_AV-2.13.json') as f:
     data = json.load(f)
 
 components = data['product']['components']
-print(len(components))
 # print(type(components))
 
 
 @app.route('/')
 def home():
-    return jsonify (components)
+    return jsonify(components)
+
+
+@app.route('/index')
+def index():
+    return render_template('index.html')
 
 
 @app.route('/components')
 def list_components():
-    comps = []
+    component_list = []
 
     with open('avchanges/component_files.json') as f:
         data = json.load(f)
 
     for key, value in data.items():
-        comps.append((key, value))
+        component_list.append((key, value))
 
-    return jsonify(comps)
+    return render_template('components.html', components=component_list)
 
 
-@app.route('/components/<det_component>')
-def get_comp_attrs(det_component):
-    x = []
+@app.route('/components/<detail_component>')
+def get_comp_attrs(detail_component):
     for comp in components:
         for key, value in comp.items():
-            if key == 'name' and value == det_component:
-                return jsonify([c['file_name'] for c in comp['config_files']])
+            if key == 'name' and value == detail_component:
+                return render_template('comp_detail.html', component_files=[c['file_name'] for c in comp['config_files']])
+                #return jsonify([c['file_name'] for c in comp['config_files']])
 
+
+
+@app.route('/component_detail')
+def update_configs():
+    pass
 
     #xml_name = components[0][det_component]
     #if os.path.exists('avchanges/'+xml_name):

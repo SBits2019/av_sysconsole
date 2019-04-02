@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Component
+{% endblock %}
+
+{% block body %}
+    <div>
+        <h4>XML's inside {{ c }}</h4>
+            <ul>
+                {% for file in component_files %}
+                    <li><a href="">{{ file }}</a></li>
+                {% endfor %}
+            </ul>
+    </div>
+{% endblock %}

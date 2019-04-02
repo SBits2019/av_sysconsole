@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Components
+{% endblock %}
+
+{% block body %}
+<br>
+    <div>
+        <ol>
+            {% for comp in components %}
+            <li><a href="">{{ comp[0] }}</a></li>
+                    <ul> 
+                        {% for i in comp[1] %}
+                            <li>{{ i }}</li>
+                        {% endfor %}
+                    </ul>
+            {% endfor %}
+        </ol>
+    </div>
+{% endblock %}
