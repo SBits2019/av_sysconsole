@@ -1,0 +1,45 @@
+=========** CSM **===========
+/etc/opt/csm/topology.xml
+-----------------------------
+<?xml version="1.0" encoding="utf-8"?>
+<!--Generated using topology_gen.pl version=2.4.1  AV version found = 2.9.0   Generated on: Wed Mar 15 23:02:59 2017 -->
+<topology>
+
+ <qams type="list">
+ </qams>
+
+ <sspsis>
+   <servers type="list">
+   </servers>
+ </sspsis>
+
+ <serviceAreaDiscovery mode="singleTSID" >
+  <serviceAreaMappings type="list">
+  </serviceAreaMappings>
+ </serviceAreaDiscovery>
+
+ <downstreamServers>
+  <servers type="list">
+	  <server host="172.20.172.6" port="16668" provides="noHardwareTranscoding"/>
+	  <server host="172.20.172.7" port="16668" provides="noHardwareTranscoding"/>
+	  <server host="172.20.172.8" port="16668" provides="noHardwareTranscoding"/>
+	  <server host="172.20.172.54" port="16668" provides="noHardwareTranscoding"/>
+          <server host="172.20.172.55" port="16668" provides="noHardwareTranscoding"/>
+  </servers>
+ </downstreamServers>
+
+    <scaling>
+        <clusters type="list">
+            <cluster cost="1" id="central-primary">
+                <queries type="list">
+                    <query>http://172.28.53.246:9100/cgi-bin/scale.fcgi</query>
+                    <query>http://172.28.53.247:9100/cgi-bin/scale.fcgi</query>
+                    <query>http://172.28.53.248:9100/cgi-bin/scale.fcgi</query>
+                </queries>
+            </cluster>
+        </clusters>
+    </scaling>
+
+<cmtsChannelCapacity>10000000</cmtsChannelCapacity>
+  
+</topology>

@@ -1,0 +1,55 @@
+=========** CSM **===========
+/etc/opt/csm/keymaps/SAStandard.xml
+-----------------------------
+<?xml version="1.0" encoding="utf-8"?>
+<keymaps xmlns="http://www.avnetworks.com/Keymaps">
+    <!--
+        Standard SA key map for the ICTV protocol, "given that all SA boxes have the same map - if not
+        then all specific maps must be defined here and assigned to the corresponding device class
+        in the class definitions below.
+
+        This map corresponds with the built-in SA map.
+    -->
+    <keymap id="SAStandard" type="numeric">
+        <key code="0x85" vkcode="VK_ENTER"/>
+        <key code="0x83" vkcode="VK_LEFT"/>
+        <key code="0x81" vkcode="VK_UP"/>
+        <key code="0x84" vkcode="VK_RIGHT"/>
+        <key code="0x82" vkcode="VK_DOWN"/>
+        <key code="0x30" vkcode="VK_0"/>
+        <key code="0x31" vkcode="VK_1"/>
+        <key code="0x32" vkcode="VK_2"/>
+        <key code="0x33" vkcode="VK_3"/>
+        <key code="0x34" vkcode="VK_4"/>
+        <key code="0x35" vkcode="VK_5"/>
+        <key code="0x36" vkcode="VK_6"/>
+        <key code="0x37" vkcode="VK_7"/>
+        <key code="0x38" vkcode="VK_8"/>
+        <key code="0x39" vkcode="VK_9"/>
+        <key code="0x92" vkcode="VK_OEMA"/>
+        <key code="0x93" vkcode="VK_OEMB"/>
+        <key code="0x94" vkcode="VK_OEMC"/>
+        <key code="0x9F" vkcode="VK_OEMD"/>
+        <key code="0x8C" vkcode="VK_MUTE"/>
+        <key code="0x8A" vkcode="VK_VOL_UP"/>
+        <key code="0x8B" vkcode="VK_VOL_DOWN"/>
+        <key code="0x99" vkcode="VK_PLAY"/>
+        <key code="0x9A" vkcode="VK_STOP"/>
+        <key code="0x98" vkcode="VK_FAST_FWD"/>
+        <key code="0x97" vkcode="VK_REWIND"/>
+        <key code="0x9B" vkcode="VK_PAUSE"/>
+        <key code="0x9C" vkcode="VK_RECORD"/>
+        <key code="0x8F" vkcode="VK_SETTINGS"/>
+        <key code="0x90" vkcode="VK_PAGE_UP"/>
+        <key code="0x91" vkcode="VK_PAGE_DOWN"/>
+        <key code="0x96" vkcode="VK_FAVORITES"/>
+        <key code="0x8D" vkcode="VK_GUIDE"/>
+        <key code="0x8E" vkcode="VK_GUIDE"/>
+        <key code="0xC0" vkcode="VK_MENU"/>
+        <key code="0x87" vkcode="VK_EXIT"/>
+        <key code="0x95" vkcode="VK_BACK_SPACE"/>
+        <key code="0xB1" vkcode="VK_HELP"/>
+        <key code="0x23" vkcode="VK_HASH"/>
+        <key code="0x2A" vkcode="VK_ASTERISK"/>
+    </keymap>
+</keymaps>

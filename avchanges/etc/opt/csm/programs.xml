@@ -1,0 +1,326 @@
+=========** CSM **===========
+/etc/opt/csm/programs.xml
+-----------------------------
+<?xml version="1.0" encoding="utf-8"?>
+<CloudTVPrograms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xmlns="http://www.avnetworks.com/CloudTVPrograms">
+
+<!--
+CSM Program specifications
+
+Note! Any changes to this file will not be recognized by CSM until it has been restarted
+-->
+
+<!-- default bitrate for all programs -->
+<!--<bitrate>3750000</bitrate>-->
+
+<!--
+To specify a default value for a specific codec, use the following:
+
+<h264>
+<bitrate>3500000</bitrate>
+</h264>
+
+Supported codecs are: h264 and mpeg2
+-->
+
+<!--
+A program must have the following attributes:
+name: program name (used to match against a defined launchmethod)
+base: the base application URL
+
+A program may have the following, optional, attributes:
+
+suspendable: whether or not the program can be suspended (defaults to false)
+video:       whether or not the program streams (defaults to true). Set to false for overlay applications
+overlayMode: specifies on which side overlays are to be processed. Can be one of 'client' (default), 'server' or 'none'
+passthroughVideo: enable passthrough video
+forceMimeTypes: (no default)
+forceUserAgent: (no default)
+scripts:     a list of .js scripts that can be inserted into the program.
+encryption:  none, required, optional
+ecmIDMode: how is the ecmID specified: 'program'->configured via ecmID in program, 'targetPort'->use targetPort of resource
+ecmID:  ECM_ID to use for SimulCrupt, if ecmIDMode = 'program'
+accesss_criteria: base64 binary access_criteria for SimulCrypt
+-->
+  <program name="webkitbench" base="webkit:http://127.0.0.1/webkitbench"
+           suspendable="false" video="true" clientOverlays="false" passthroughVideo="false" scripts="http://localhost/a.js http://localhost/b.js"
+           encryption="none" ecmIDMode="program" ecmID="337" accessCriteria="QUJDCg==">
+
+    <!--
+        The default entry point. This is mandatory!
+
+        Entry points have the following, optional, attribute:
+
+        name: a named entry point. These may be referenced in a launchmethod as: <program name>.<entry name>
+        startProfile: reference to a bitrate definition
+
+        If no startProfile attribute is specified, the default bitrate is used.
+    -->
+    <entry>/index.html</entry>
+
+    <!-- entry points can have an attribute startProfile, named below
+          <entry startProfile="epg">/index.html</entry>
+    -->
+
+    <!--
+      Example of a named entry point: webkitbench.keytest
+    -->
+    <entry name="keytest" startProfile="keytest">/tests/keys/index.html</entry>
+
+    <!--
+       Bitrate definitions.
+
+      The default bitrate for this program is defined as follows:
+
+      <bitrate>default bitrate value</bitrate>
+
+      A specific bitrate is defined as follows:
+
+      <bitrateProfile name="keys">bitrate value</bitrateProfile>
+
+      It may be referenced in an entry definition as follows:
+
+       <entry startProfile="keys" name="keytest">/tests/keys/index.html</entry>
+
+        See below for actual examples
+    -->
+
+    <!-- default program bitrate -->
+    <bitrate>3500000</bitrate>
+
+    <!-- bitrate override for the keytest entry -->
+    <bitrateProfile name="keytest">2750000</bitrateProfile>
+
+
+    <!--
+        Overrides for codecs
+
+        To specify bitrates for a specific codec, use the following:
+
+        <codec name>
+        <bitrate>default bitrate for this codec and this program</bitrate>
+        <bitrateProfile name="some name">bitrate for this codec when used for an entry referencing this bitrate definition</bitrateProfile>
+        </codec name>
+
+        Supported codec names are: h264 and mpeg2
+
+        See below for an example
+    -->
+
+    <!--
+       <h264>
+       <bitrate>4250000</bitrate>
+       <bitrateProfile name="keytest">1750000</bitrateProfile>
+       </h264>
+    -->
+
+    <!--
+        List of resolutions supported for the program. If this element is not present, all resolutions suppported by the
+        client are supported but resolution-specific overrides are not possible.
+
+       If present, only the listed resolutions are supported, unless a catch-all resolution is provided.
+     -->
+    <supported-resolutions>
+      <resolution height="576">
+        <!-- insert settings for this resolution -->
+      </resolution>
+      <resolution height="1088">
+        <!-- insert settings for this resolution -->
+        <bitrate>5250000</bitrate>
+      </resolution>
+      <resolution height="*">
+        <!-- catch-all resolution -->
+      </resolution>
+    </supported-resolutions>
+  </program>
+
+  <program name="youtube"
+           base="webkit:https://youtube.com"
+           video="true" clientOverlays="false" serverOverlays="true" restrictOverlayEncodings="bmp200,png,jpg"
+           passthroughVideo="false" scalable="true" forceMimeTypes="video/mp4,audio/mp4"
+           suspendable="false"
+           scripts="http://172.20.175.201/avapps/resources/keymap.js
+			http://172.20.175.201/avapps/resources/exit_session.js"
+           forceUserAgent="ActiveVideo CloudTV H5/%v, Charter (Charter, %s, Wired)"
+           requiresSRM="DbmPlugin"
+   requires="noHardwareTranscoding">
+    <entry>/tv</entry>
+    <supported-resolutions>
+      <resolution height="720">
+        <bitrate>9000000</bitrate>
+      </resolution>
+    </supported-resolutions>
+  </program>
+
+  <program name="diagnostics" base="webkit:http://172.20.175.201/avapps/diagnostics/diagnostics_v2.2.3/diagnostics_main_menu/html/" suspendable="true" video="true" clientOverlays="false" forceUserAgent="Mozilla/5.0 (CloudTV v%v; like Mac OS X; en-us) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36 (Client: %s)"
+           requiresSRM="DbmPlugin"
+   requires="noHardwareTranscoding">
+    <entry></entry>
+    <entry name="main">index.html</entry>
+  </program>
+
+
+
+       <program name="applauncher" base="webkit:http://172.20.175.201/applauncher/" suspendable="true" video="true" clientOverlays="false" forceUserAgent="Mozilla/5.0 (CloudTV v%v; like Mac OS X; en-us) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36 (Client: %s)" 
+      requiresSRM="DbmPlugin"
+        requires="noHardwareTranscoding" >
+       <entry></entry>
+
+       <supported-resolutions>
+            <resolution height="480">
+                <bitrateProfile name="Default_SD">1000000</bitrateProfile>
+                <bitrateProfile name="Low_SD">1000000</bitrateProfile>
+                <bitrateProfile name="MediumLow_SD">1200000</bitrateProfile>
+                <bitrateProfile name="Medium_SD">1500000</bitrateProfile>
+                <bitrateProfile name="High_SD">2000000</bitrateProfile>
+
+                        <entry name="sd" startProfile="Medium_SD">index.html</entry>
+                        <entry startProfile="Default_SD"></entry>
+                        <bitrate>4000000</bitrate>
+                        <quant>14</quant>
+                        <aquant>30</aquant>
+                        <txtquant>2</txtquant>
+            </resolution>
+
+            <resolution height="720">
+                <bitrateProfile name="Default_HD">1600000</bitrateProfile>
+                <bitrateProfile name="Low_HD">1600000</bitrateProfile>
+                <bitrateProfile name="MediumLow_HD">1800000</bitrateProfile>
+                <bitrateProfile name="Medium_HD">2000000</bitrateProfile>
+                <bitrateProfile name="High_HD">2500000</bitrateProfile>
+
+                        <entry name="hd" startProfile="Medium_HD">index.html</entry>
+                        <entry startProfile="Default_HD"></entry>
+                        <bitrate>6000000</bitrate>
+                        <quant>14</quant>
+                        <aquant>30</aquant>
+                        <txtquant>2</txtquant>
+            </resolution>
+        </supported-resolutions>
+   </program>
+
+      <program name="applobby-175-A" base="webkit:http://172.20.175.201/avapps/applobby/applobby_v1.7.5-A/" suspendable="false" video="true" clientOverlays="false" serverOverlays="true" restrictOverlayEncodings="png"  forceUserAgent="ActiveVideo CloudTV H5/%v, Charter (Charter, %s, Wired)"
+               requiresSRM="DbmPlugin"
+       >
+
+        <entry>index.html</entry>
+        <supported-resolutions>
+
+          <resolution height="720">
+              <entry name="dcd_0">index.html?config=config-bodcma-BODCMA-specA</entry>
+            <h264>
+              <bitrate>1600000</bitrate>
+            </h264>
+            <mpeg2>
+              <bitrate>1600000</bitrate>
+            </mpeg2>
+          </resolution>
+
+          <resolution height="480">
+              <entry name="dcd_0">index.html?config=config-bodcma-BODCMA-specA</entry>
+            <h264>
+              <bitrate>1000000</bitrate>
+            </h264>
+            <mpeg2>
+              <bitrate>1000000</bitrate>
+            </mpeg2>
+          </resolution>
+        </supported-resolutions>
+      </program>
+
+
+
+      <!-- SGUI Version and stack 2.52.0-A -->
+      <program name="spectrum-2520-A" base="webkit:http://172.20.175.201/avapps/spectrum/spectrum_v2.52.0-A/" suspendable="true" video="true" clientOverlays="false"
+               requiresSRM="DbmPlugin"
+       requires="noHardwareTranscoding">
+
+        <entry></entry>
+
+        <supported-resolutions>
+          <resolution height="480">
+            <bitrateProfile name="Default_SD">1000000</bitrateProfile>
+            <bitrateProfile name="Low_SD">1000000</bitrateProfile>
+            <bitrateProfile name="MediumLow_SD">1200000</bitrateProfile>
+            <bitrateProfile name="Medium_SD">1500000</bitrateProfile>
+            <bitrateProfile name="High_SD">2000000</bitrateProfile>
+
+            <entry name="home" startProfile="Medium_SD">index.html?state=home&amp;config=config-bodcma-BODCMA-specA.js</entry>
+            <entry name="guide" startProfile="Low_SD">index.html?state=guide&amp;config=config-bodcma-BODCMA-specA.js</entry>
+            <entry name="ondemand" startProfile="Medium_SD">index.html?state=tv&amp;config=config-bodcma-BODCMA-specA.js</entry>
+            <entry name="settings" startProfile="Low_SD">index.html?state=settings&amp;config=config-bodcma-BODCMA-specA.js</entry>
+            <entry name="settings_SD" startProfile="Low_SD">index.html?state=settings_presentation&amp;config=config-bodcma-BODCMA-specA.js</entry>
+            <entry name="infobanner" startProfile="MediumLow_SD">index.html?state=infobanner&amp;config=config-bodcma-BODCMA-specA.js</entry>
+            <entry name="networkdetails" startProfile="MediumLow_SD">index.html?state=networkdetails&amp;config=config-bodcma-BODCMA-specA.js</entry>
+            <entry name="dvr" startProfile="MediumLow_SD">index.html?state=dvr&amp;config=config-bodcma-BODCMA-specA.js</entry>
+            <entry name="instantupgrade" startProfile="Low_SD">index.html?state=instant_upgrade&amp;config=config-bodcma-BODCMA-specA.js</entry>
+            <entry name="search" startProfile="MediumLow_SD">index.html?state=search&amp;config=config-bodcma-BODCMA-specA.js</entry>
+            <entry name="vod_launch" startProfile="Medium_SD">index.html?state=vod_launch&amp;config=config-bodcma-BODCMA-specA.js</entry>
+            <entry name="account_screen" startProfile="Medium_SD">index.html?state=account_screen&amp;config=config-bodcma-BODCMA-specA.js</entry>
+            <entry startProfile="Default_SD"></entry>
+
+            <mpeg2>
+              <bitrateProfile name="Default_SD">1000000</bitrateProfile>
+              <bitrateProfile name="Low_SD">1000000</bitrateProfile>
+              <bitrateProfile name="MediumLow_SD">1200000</bitrateProfile>
+              <bitrateProfile name="Medium_SD">1500000</bitrateProfile>
+              <bitrateProfile name="High_SD">2000000</bitrateProfile>
+
+              <bitrate>4000000</bitrate>
+              <quant>3</quant>
+              <aquant>4</aquant>
+              <txtquant>2</txtquant>
+            </mpeg2>
+
+            <h264>
+              <bitrate>4000000</bitrate>
+              <quant>14</quant>
+              <aquant>30</aquant>
+            </h264>
+          </resolution>
+
+          <resolution height="720">
+            <bitrateProfile name="Default_HD">1600000</bitrateProfile>
+            <bitrateProfile name="Low_HD">1600000</bitrateProfile>
+            <bitrateProfile name="MediumLow_HD">1800000</bitrateProfile>
+            <bitrateProfile name="Medium_HD">2000000</bitrateProfile>
+            <bitrateProfile name="High_HD">2500000</bitrateProfile>
+            <entry name="home" startProfile="Medium_HD">index.html?state=home&amp;config=config-bodcma-BODCMA-specA.js</entry>
+            <entry name="guide" startProfile="High_HD">index.html?state=guide&amp;config=config-bodcma-BODCMA-specA.js</entry>
+            <entry name="ondemand" startProfile="Medium_HD">index.html?state=tv&amp;config=config-bodcma-BODCMA-specA.js</entry>
+            <entry name="settings" startProfile="Low_HD">index.html?state=settings&amp;config=config-bodcma-BODCMA-specA.js</entry>
+            <entry name="settings_HD" startProfile="Low_HD">index.html?state=settings_presentation&amp;config=config-bodcma-BODCMA-specA.js</entry>
+            <entry name="infobanner" startProfile="MediumLow_HD">index.html?state=infobanner&amp;config=config-bodcma-BODCMA-specA.js</entry>
+            <entry name="networkdetails" startProfile="MediumLow_HD">index.html?state=networkdetails&amp;config=config-bodcma-BODCMA-specA.js</entry>
+            <entry name="dvr" startProfile="Low_HD">index.html?state=dvr&amp;config=config-bodcma-BODCMA-specA.js</entry>
+            <entry name="instantupgrade" startProfile="Low_HD">index.html?state=instant_upgrade&amp;config=config-bodcma-BODCMA-specA.js</entry>
+            <entry name="search" startProfile="MediumLow_HD">index.html?state=search&amp;config=config-bodcma-BODCMA-specA.js</entry>
+            <entry name="vod_launch" startProfile="Medium_HD">index.html?state=vod_launch&amp;config=config-bodcma-BODCMA-specA.js</entry>
+            <entry name="account_screen" startProfile="Medium_HD">index.html?state=account_screen&amp;config=config-bodcma-BODCMA-specA.js</entry>
+            <entry startProfile="Default_HD"></entry>
+
+            <mpeg2>
+              <bitrateProfile name="Default_HD">1600000</bitrateProfile>
+              <bitrateProfile name="Low_HD">1600000</bitrateProfile>
+              <bitrateProfile name="MediumLow_HD">1800000</bitrateProfile>
+              <bitrateProfile name="Medium_HD">2000000</bitrateProfile>
+              <bitrateProfile name="High_HD">2500000</bitrateProfile>
+
+              <bitrate>6000000</bitrate>
+              <quant>3</quant>
+              <aquant>5</aquant>
+              <txtquant>2</txtquant>
+            </mpeg2>
+
+            <h264>
+              <bitrate>6000000</bitrate>
+              <quant>14</quant>
+              <aquant>30</aquant>
+            </h264>
+
+          </resolution>
+        </supported-resolutions>
+      </program>
+
+</CloudTVPrograms>

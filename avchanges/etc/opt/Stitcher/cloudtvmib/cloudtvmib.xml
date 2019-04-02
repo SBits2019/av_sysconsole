@@ -1,0 +1,202 @@
+=======** Stitcher **==========
+/opt/cloudtvmib/cloudtvmib.xml
+-----------------------------
+<MIBExtensionConfig>
+
+    <!--
+        possible log levels are:
+        'CRITICAL', 'ERROR', 'WARNING'/ 'WARN', 'INFO', 'DEBUG'
+        if not defined in this config, defaults to 'WARNING'
+    -->
+
+    <logging level="WARNING"/>
+
+    <idlerestart threshold="1000" timeout="5"/>
+    <graceperiod timeout="10"/>
+
+    <variable oid=".1.3.6.1.4.1.1192" method="fixed">
+        <type>string</type>
+        <value>AVDN</value>
+    </variable>
+
+    <!-- for old style USM, the section for .1.3.6.1.4.1.1192.1.1.1 should read: -->
+    <!--
+    <variable oid=".1.3.6.1.4.1.1192.1.1.1" method="xml_component_status" name="usm">
+        <runtime>/etc/init.d/usm</runtime>
+        <source url="http://127.0.0.1:8088/snmpget" timeout="2" xsd="component.xsd"/>
+    </variable>
+    -->
+
+    <variable oid=".1.3.6.1.4.1.1192.1.1.1" method="xml_component_status" name="lsm">
+         <runtime>/opt/lsm/csm.jar</runtime>
+         <source url="http://127.0.0.1:8096/snmpget" timeout="2" xsd="component.xsd"/>
+    </variable>
+
+    <variable oid=".1.3.6.1.4.1.1192.1.1.1.10" method="xml_component_status" name="compositor">
+         <runtime>/opt/compositor-ng/compositor-ng</runtime>
+         <source url="http://127.0.0.1:8093/streamer?method=lba_stats" timeout="2" xsd="component.xsd"/>
+    </variable>
+
+    <variable oid=".1.3.6.1.4.1.1192.1.1.2" method="xml_component_status" name="udc">
+        <!-- UDC -->
+        <runtime>/opt/udc/udc.jar</runtime>
+        <source url="http://127.0.0.1:8083/snmpget" timeout="2"/>
+    </variable>
+
+    <variable oid=".1.3.6.1.4.1.1192.1.1.3" method="xml_component_status" name="scaler" ttl="15">
+        <!-- Scaler -->
+        <runtime>/opt/scaler/cgi-bin/scaler.pl</runtime>
+        <source url="http://127.0.0.1/cgi-bin/snmpget.fcgi" timeout="5"/>
+    </variable>
+
+    <variable oid=".1.3.6.1.4.1.1192.1.1.4" method="xml_component_status" name="transcodermgr" ttl="15">
+        <!-- Transcoder -->
+        <runtime>/opt/transcoder/cgi-bin/transcoder_mgr.pl</runtime>
+        <source url="http://127.0.0.1/cgi-bin/snmpget.fcgi" timeout="5"/>
+    </variable>
+
+    <variable oid=".1.3.6.1.4.1.1192.1.1.5.1" method="xml_component_status" name="funnelcontrol" ttl="2">
+        <!-- FunnelCtrl -->
+        <runtime>/usr/local/activevideo/funnel/control/bin/run.sh</runtime>
+        <source url="http://127.0.0.1:8095/snmpget"/>
+    </variable>
+
+    <variable oid=".1.3.6.1.4.1.1192.1.1.5.2" method="xml_component_status" name="funnelprocessing" ttl="2">
+        <!-- FunnelProcessor -->
+        <runtime>/usr/local/activevideo/funnel/processing/bin/run.sh</runtime>
+        <source url="http://127.0.0.1:8088/snmpget"/>
+    </variable>
+
+    <variable oid=".1.3.6.1.4.1.1192.1.1.5.3" method="xml_component_status" name="funneldelivery" ttl="2">
+        <!-- FunnelDelivery -->
+        <runtime>/usr/local/activevideo/funnel/delivery/bin/run.sh</runtime>
+        <source url="http://127.0.0.1:8080/snmpget"/>
+    </variable>
+
+    <variable oid=".1.3.6.1.4.1.1192.1.1.5.4" method="xml_component_status" name="asserlocator" ttl="2">
+        <!-- FunnelLocator -->
+        <runtime>/etc/init.d/avn-assetlocatord</runtime>
+        <source url="http://127.0.0.1:8090/snmpget"/>
+    </variable>
+
+    <variable oid=".1.3.6.1.4.1.1192.1.1.6" method="xml_component_status" name="brm">
+        <!-- BRM -->
+        <runtime>/etc/init.d/brm</runtime>
+        <source url="http://127.0.0.1:9001/snmpget" timeout="2"/>
+    </variable>
+
+    <variable oid=".1.3.6.1.4.1.1192.1.1.10" method="xml_component_status" name="c2agent">
+        <!-- c2agent -->
+        <runtime>/etc/init.d/c2agent</runtime>
+        <source url="http://127.0.0.1:8099/c2agent/snmpget" timeout="2"/>
+    </variable>
+
+    <variable oid=".1.3.6.1.4.1.1192.1.1.11" method="load_balancer_agent" name="lbagent">
+        <resources>
+            <cpu idle="20%" alpha="0.1"/>
+            <memory max="85%"/>
+            <filesystems usage="95%"/>
+        </resources>
+
+        <processes>
+            <process name="trafficserver">
+                <runtime>/usr/bin/traffic_cop</runtime>
+                <regex>traffic_cop</regex>
+            </process>
+            <process name="kestrel">
+                <runtime>/opt/queue/kestrel-1.2.jar</runtime>
+                <regex>kestrel</regex>
+            </process>
+        </processes>
+
+        <state>
+            <local oid=".1.3.6.1.4.1.1192.1.1.1.1.0"/>
+            <local oid=".1.3.6.1.4.1.1192.1.1.2.1.0"/>
+            <local oid=".1.3.6.1.4.1.1192.1.1.3.1.0"/>
+            <local oid=".1.3.6.1.4.1.1192.1.1.4.1.0"/>
+            <local oid=".1.3.6.1.4.1.1192.1.1.5.1.1.0"/>
+            <local oid=".1.3.6.1.4.1.1192.1.1.5.2.1.0"/>
+            <local oid=".1.3.6.1.4.1.1192.1.1.5.3.1.0"/>
+            <local oid=".1.3.6.1.4.1.1192.1.1.5.4.1.0"/>
+            <local oid=".1.3.6.1.4.1.1192.1.1.6.1.0"/>
+            <local oid=".1.3.6.1.4.1.1192.1.1.10.1.0"/>
+            <local oid=".1.3.6.1.4.1.1192.1.1.12.1.0"/>
+            <local oid=".1.3.6.1.4.1.1192.1.1.16.1.0"/>
+            <local oid=".1.3.6.1.4.1.1192.1.1.17.1.0"/>     <!-- scaler-mgr     -->
+            <local oid=".1.3.6.1.4.1.1192.1.1.18.1.0"/>     <!-- scaler-node    -->
+
+            <!-- example remote entries -->
+            <!-- <remote hostname="172.17.14.27" oid=".1.3.6.1.4.1.1192.1.1.6.1.0"/> -->
+            <!-- <remote hostname="172.17.14.27" port="1600" oid=".1.3.6.1.4.1.1192.1.1.7.1.0" community="blah"/> -->
+        </state>
+
+    </variable>
+
+    <variable oid=".1.3.6.1.4.1.1192.1.1.12" method="xml_component_status" name="csm">
+        <!-- Session Manager -->
+        <runtime>/opt/csm/csm.jar</runtime>
+        <source url="http://127.0.0.1:8088/snmpget" timeout="2" xsd="component.xsd"/>
+    </variable>
+
+    <!--
+         If LSM and CSM are installed on the same system, the .12 OID causes a circular dependency between
+         these components. The .14 OID eliminates this dependency and should be used when LSM is installed
+         on the same system as CSM.
+         Note that the same applies for scaler-mgr and scaler-node!
+    -->
+    <variable oid=".1.3.6.1.4.1.1192.1.1.14" method="load_balancer_agent2" name="lbagent2">
+        <resources>
+            <cpu idle="20%"/>
+            <memory max="85%"/>
+            <filesystems usage="95%"/>
+        </resources>
+
+        <processes>
+            <process name="trafficserver">
+                <runtime>/usr/bin/traffic_cop</runtime>
+                <regex>traffic_cop</regex>
+            </process>
+            <process name="kestrel">
+                <runtime>/opt/queue/kestrel-1.2.jar</runtime>
+                <regex>kestrel</regex>
+            </process>
+        </processes>
+
+        <state>
+            <local oid=".1.3.6.1.4.1.1192.1.1.1.1.0"/>          <!-- LSM                    -->
+            <local oid=".1.3.6.1.4.1.1192.1.1.2.1.0"/>          <!-- UDC                    -->
+            <local oid=".1.3.6.1.4.1.1192.1.1.3.1.0"/>          <!-- scaler                 -->
+            <local oid=".1.3.6.1.4.1.1192.1.1.4.1.0"/>          <!-- transcoder             -->
+            <local oid=".1.3.6.1.4.1.1192.1.1.5.1.1.0"/>        <!-- funnel                 -->
+            <local oid=".1.3.6.1.4.1.1192.1.1.5.2.1.0"/>        <!-- funnel                 -->
+            <local oid=".1.3.6.1.4.1.1192.1.1.5.3.1.0"/>        <!-- funnel                 -->
+            <local oid=".1.3.6.1.4.1.1192.1.1.5.4.1.0"/>        <!-- asset locator          -->
+            <local oid=".1.3.6.1.4.1.1192.1.1.6.1.0"/>          <!-- BRM                    -->
+            <local oid=".1.3.6.1.4.1.1192.1.1.10.1.0"/>         <!-- c2agent                -->
+            <!--local oid=".1.3.6.1.4.1.1192.1.1.12.1.0"/-->    <!-- EXCLUDED: CSM          -->
+            <!--local oid=".1.3.6.1.4.1.1192.1.1.16.1.0"/-->    <!-- EXCLUDED: PSM          -->
+            <!--local oid=".1.3.6.1.4.1.1192.1.1.17.1.0"/-->    <!-- EXCLUDED: scaler-mgr   -->
+            <local oid=".1.3.6.1.4.1.1192.1.1.18.1.0"/>         <!-- scaler-node            -->
+        </state>
+
+    </variable>
+
+    <variable oid=".1.3.6.1.4.1.1192.1.1.16" method="xml_component_status" name="psm">
+        <!-- Persistent Storage Cluster -->
+        <runtime>/usr/bin/asd</runtime>
+        <source url="file:///var/opt/psmadmin/psm-snmp.xml" timeout="2" xsd="component.xsd"/>
+    </variable>
+
+    <variable oid=".1.3.6.1.4.1.1192.1.1.17" method="xml_component_status" name="scalermgr">
+        <!-- scaler-mgr -->
+        <runtime>/opt/scaler-mgr/csm.jar</runtime>
+        <source url="http://127.0.0.1:8097/snmpget" timeout="2"/>
+    </variable>
+
+    <variable oid=".1.3.6.1.4.1.1192.1.1.18" method="xml_component_status" name="scalernode">
+        <!-- scaler-node -->
+        <runtime>/opt/scaler-node/csm.jar</runtime>
+        <source url="http://127.0.0.1:8098/snmpget" timeout="2"/>
+    </variable>
+
+</MIBExtensionConfig>

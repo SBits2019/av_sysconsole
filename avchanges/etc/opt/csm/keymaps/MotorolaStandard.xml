@@ -1,0 +1,60 @@
+=========** CSM **===========
+/etc/opt/csm/keymaps/MotorolaStandard.xml
+-----------------------------
+<?xml version="1.0" encoding="utf-8"?>
+<keymaps xmlns="http://www.activevideo.com/Keymaps">
+  <keymap id="MotorolaStandard" type="numeric">
+    <!-- MotorolaStandard key map. This file is for customizing MotorolaStandard keymappings.  
+        To enable, add the following line to /etc/opt/csm.xml's BcpPlugin section:
+                  <keymaps>/etc/opt/csm/keymaps/MotorolaStandard.xml</keymaps>
+   -->
+    <key code="0x00" vkcode="VK_0"/>
+    <key code="0x01" vkcode="VK_1"/>
+    <key code="0x02" vkcode="VK_2"/>
+    <key code="0x03" vkcode="VK_3"/>
+    <key code="0x04" vkcode="VK_4"/>
+    <key code="0x05" vkcode="VK_5"/>
+    <key code="0x06" vkcode="VK_6"/>
+    <key code="0x07" vkcode="VK_7"/>
+    <key code="0x08" vkcode="VK_8"/>
+    <key code="0x09" vkcode="VK_9"/>
+    <key code="0x0B" vkcode="VK_CHANNEL_UP"/>
+    <key code="0x0C" vkcode="VK_CHANNEL_DOWN"/>
+    <key code="0x11" vkcode="VK_ENTER"/>
+    <key code="0x12" vkcode="VK_EXIT"/>
+    <key code="0x13" vkcode="VK_BACK_SPACE"/>   <!-- Key pressed == LAST -->
+    <key code="0x15" vkcode="VK_FAVORITES"/>
+    <key code="0x17" vkcode="VK_OEMA"/>
+    <key code="0x18" vkcode="VK_ONDEMAND"/>
+    <key code="0x19" vkcode="VK_MENU"/>
+    <key code="0x1B" vkcode="VK_PLAY"/>
+    <key code="0x1C" vkcode="VK_STOP"/>
+    <key code="0x1D" vkcode="VK_FAST_FWD"/>
+    <key code="0x1E" vkcode="VK_REWIND"/>
+    <key code="0x1F" vkcode="VK_PAUSE"/>
+    <key code="0x27" vkcode="VK_OEMB"/>
+    <key code="0x28" vkcode="VK_OEMC"/>
+    <key code="0x29" vkcode="VK_OEMD"/>
+    <key code="0x30" vkcode="VK_GUIDE"/>
+    <key code="0x31" vkcode="VK_RECORD"/>
+    <key code="0x32" vkcode="VK_HELP"/>
+    <key code="0x33" vkcode="VK_INFO"/>
+    <key code="0x34" vkcode="VK_UP"/>
+    <key code="0x35" vkcode="VK_DOWN"/>
+    <key code="0x36" vkcode="VK_LEFT"/>
+    <key code="0x37" vkcode="VK_RIGHT"/>
+    <key code="0x38" vkcode="VK_DAYUP"/>
+    <key code="0x39" vkcode="VK_DAYDOWN"/>
+    <key code="0x3A" vkcode="VK_PAGE_UP"/>
+    <key code="0x3B" vkcode="VK_PAGE_DOWN"/>
+    <key code="0x3C" vkcode="VK_REPLAY"/>
+    <key code="0x3D" vkcode="VK_MYDVR"/>
+    <key code="0x3E" vkcode="VK_LIVE"/>
+    <key code="0x3F" vkcode="VK_SKIP_FWD"/>
+    <key code="0x40" vkcode="VK_SETUP"/>
+    <key code="0x10" vkcode="VK_SEARCH"/>
+    <key code="0x50" vkcode="VK_PLAYPAUSE"/>
+    <key code="0x51" vkcode="VK_REPLAY"/> <!-- Key pressed == BACK - Black Spec RCU -->  
+    <key code="0x52" vkcode="VK_OPTIONS"/>
+  </keymap>
+</keymaps>

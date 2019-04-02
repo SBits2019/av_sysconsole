@@ -1,0 +1,150 @@
+=========** CSM **===========
+/etc/opt/csm/launchmethods.xml
+-----------------------------
+<?xml version="1.0" encoding="utf-8"?>
+<CloudTVLaunchMethods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                      xmlns="http://www.avnetworks.com/CloudLaunchMethods">
+
+  <!--
+      Note! Any changes to this file will not be recognized by CSM until it has been restarted
+
+      The launchmethod definition for CSM differs significantly from that for USM.
+
+      In USM, a launchmethod definition looks like this:
+
+      <LaunchMethod name="Facebook" channel="0" source="2" mode="23" groupid="2" priority="1" program="fb_1"/>
+
+      In CSM, the same definition looks like this:
+      <launchmethod program="fb_1">
+          <match name="channel" value="0"/>
+          <match name="source"  value="2"/>
+          <match name="mode"    value="23"/>
+      </launchmethod>
+
+      Any key/value pair can be specified in the <match> criteria. For example, the following is also
+      a valid launchmethod:
+
+      <launchmethod program="someProgram">
+          <match name="launch_method" value="key:red" />
+          <match name="channel" value="tv:BBC3" />
+      </launchmethod>
+  -->
+  <launchmethod program="webkitbench">
+    <match name="channel" value="1"/>
+    <match name="source" value="2"/>
+    <match name="mode" value="3"/>
+  </launchmethod>
+
+  <!--
+      To use this launchMethod with the bcp protocol, enable the 'Launch Param' option in the CTV
+      protocol settings and enter key:red as the LaunchParameter value.
+  -->
+  <launchmethod program="webkitbench.keytest">
+    <!--
+        To use the launchParameter match below, uncomment it, enable the 'Launch Param' option in
+        the CTV BCP protocol settings and enter key:red as the LaunchParameter value.
+    -->
+    <!--
+    <match name="launchParameter" value="key:red"/>
+    -->
+    <match name="channel" value="1"/>
+    <match name="source" value="3"/>
+    <match name="mode" value="3"/>
+  </launchmethod>
+
+  <!--
+      To use this launchMethod with the bcp protocol, enable the 'Launch Param' option in the CTV
+      protocol settings and enter key:red as the LaunchParameter value.
+  -->
+  <launchmethod program="webkitbench.keytest">
+    <!--
+        To use the launchParameter match below, uncomment it, enable the 'Launch Param' option in
+        the CTV BCP protocol settings and enter key:red as the LaunchParameter value.
+    -->
+    <!--
+    <match name="launchParameter" value="key:red"/>
+    -->
+    <match name="channel" value="1"/>
+    <match name="mode" value="3"/>
+  </launchmethod>
+
+
+
+
+
+      <!-- DCD Group 0 -->
+      
+
+         <!-- applobby launch methods -->
+      
+      <launchmethod program="applobby-175-A.dcd_0">
+      <match name="mode" value="77"/>
+      </launchmethod>
+      <launchmethod program="applobby-175-A.dcd_0">
+      <match name="mode" value="18"/>
+      <match name="channel" value="1002"/>
+      </launchmethod>
+      <launchmethod program="applobby-175-A.dcd_0">
+      <match name="mode" value="67"/>
+      <match name="channel" value="1002"/>
+      </launchmethod>
+      <launchmethod program="applobby-175-A.dcd_0">
+      <match name="mode" value="25"/>
+      <match name="channel" value="1002"/>
+      <match name="launch_parameter" value="070100"/>
+      </launchmethod>
+      <launchmethod program="applobby-175-A.dcd_0">
+      <match name="mode" value="48"/>
+      <match name="channel" value="1002"/>
+      <match name="launch_parameter" value="070100"/>
+      </launchmethod>
+      <launchmethod program="applobby-175-A.dcd_0">
+      <match name="mode" value="65"/>
+      <match name="channel" value="1002"/>
+      <match name="launch_parameter" value="070100"/>
+      </launchmethod>
+      <launchmethod program="applobby-175-A.dcd_0">
+      <match name="mode" value="66"/>
+      <match name="channel" value="1002"/>
+      <match name="launch_parameter" value="070100"/>
+      </launchmethod>
+
+      <!-- SGUI launch methods -->
+
+      <launchmethod program="spectrum-2520-A.account_screen">
+        <match name="channel" value="2401"/>
+      </launchmethod>
+
+        <launchmethod program="spectrum-2520-A.home">
+          <match name="mode" value="25"/>
+        </launchmethod>
+        <launchmethod program="spectrum-2520-A.guide">
+          <match name="mode" value="48"/>
+        </launchmethod>
+        <launchmethod program="spectrum-2520-A.infobanner">
+          <match name="mode" value="51"/>
+        </launchmethod>
+        <launchmethod program="spectrum-2520-A.ondemand">
+          <match name="mode" value="65"/>
+        </launchmethod>
+        <launchmethod program="spectrum-2520-A.dvr">
+          <match name="mode" value="66"/>
+        </launchmethod>
+        <launchmethod program="spectrum-2520-A.settings">
+          <match name="mode" value="70"/>
+        </launchmethod>
+        <launchmethod program="spectrum-2520-A.vod_launch">
+          <match name="mode" value="71"/>
+        </launchmethod>
+        <launchmethod program="spectrum-2520-A.instantupgrade">
+          <match name="mode" value="73"/>
+        </launchmethod>
+        <launchmethod program="spectrum-2520-A.networkdetails">
+          <match name="mode" value="75"/>
+        </launchmethod>
+        <launchmethod program="spectrum-2520-A.search">
+          <match name="mode" value="76"/>
+        </launchmethod>
+
+
+</CloudTVLaunchMethods>

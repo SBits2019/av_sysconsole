@@ -85,7 +85,18 @@
 							"xml_path": "/udc/",
 							"explanation_text": "The configuration file /etc/opt/collector.conf is replaced by /etc/opt/udc.xml on Session Manager members and Stitchers To configure the central Data Collector, configure a HTTP Post dispatcher with the Data Collector’s URL.",
 							"modification_type": "Replaced"
-						}]
+						}, 
+                        {
+                        
+							"attribute_name": "Local Data Collector",
+							"attribute_description": "Kestrel and the collector are replaced by a local Data Collector running on the Session Manager members and Stitcher",
+							"value": true,
+							"default": "",
+							"xml_path": "/udc/",
+							"explanation_text": "The configuration file /etc/opt/collector.conf is replaced by /etc/opt/udc.xml on Session Manager members and Stitchers To configure the central Data Collector, configure a HTTP Post dispatcher with the Data Collector’s URL.",
+							"modification_type": "Replaced"
+                        }
+                        ]
 					}
 				]
 			},

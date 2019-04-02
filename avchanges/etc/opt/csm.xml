@@ -1,0 +1,148 @@
+=========** CSM **===========
+/etc/opt/csm/keymaps/X11.xml
+-----------------------------
+<?xml version="1.0" encoding="utf-8"?>
+<keymaps xmlns="http://www.avnetworks.com/Keymaps">
+    <!-- Standard X11 key map for boxes using X11 keycodes 
+
+	This is a type="numeric" key map, for which numeric values are assigned to virtual key codes -->
+	<keymap id="X11" type="numeric">
+        <key code="0x10000024" vkcode="VK_BACK_SPACE"/>
+        <key code="0x10000001" vkcode="VK_REPLAY"/>
+        <key code="0x0000FF0B" vkcode="VK_CLEAR"/>
+        <key code="0x10000012" vkcode="VK_PAUSE"/>
+        <key code="0x10000000" vkcode="VK_ENTER"/>
+        <key code="0x0000FF55" vkcode="VK_PAGE_UP"/>
+        <key code="0x0000FF56" vkcode="VK_PAGE_DOWN"/>
+        <key code="0x10000022" vkcode="VK_END"/>
+        <key code="0x0000FF95" vkcode="VK_HOME"/>
+        <key code="0x0000FF51" vkcode="VK_LEFT"/>
+        <key code="0x0000FF52" vkcode="VK_UP"/>
+        <key code="0x0000FF53" vkcode="VK_RIGHT"/>
+        <key code="0x0000FF54" vkcode="VK_DOWN"/>
+        <key code="0x0000FF60" vkcode="VK_SELECT"/>
+        <key code="0x00000030" vkcode="VK_0"/>
+        <key code="0x00000031" vkcode="VK_1"/>
+        <key code="0x00000032" vkcode="VK_2"/>
+        <key code="0x00000033" vkcode="VK_3"/>
+        <key code="0x00000034" vkcode="VK_4"/>
+        <key code="0x00000035" vkcode="VK_5"/>
+        <key code="0x00000036" vkcode="VK_6"/>
+        <key code="0x00000037" vkcode="VK_7"/>
+        <key code="0x00000038" vkcode="VK_8"/>
+        <key code="0x00000039" vkcode="VK_9"/>
+        <!--
+            a-z lowercase. These use the same vk and key codes as uppercase A-Z.
+            Reverse lookup will always return the uppercase character.
+        -->
+        <key code="0x00000041" vkcode="VK_a"/>
+        <key code="0x00000042" vkcode="VK_b"/>
+        <key code="0x00000043" vkcode="VK_c"/>
+        <key code="0x00000044" vkcode="VK_d"/>
+        <key code="0x00000045" vkcode="VK_e"/>
+        <key code="0x00000046" vkcode="VK_f"/>
+        <key code="0x00000047" vkcode="VK_g"/>
+        <key code="0x00000048" vkcode="VK_h"/>
+        <key code="0x00000049" vkcode="VK_i"/>
+        <key code="0x0000004A" vkcode="VK_j"/>
+        <key code="0x0000004B" vkcode="VK_k"/>
+        <key code="0x0000004C" vkcode="VK_l"/>
+        <key code="0x0000004D" vkcode="VK_m"/>
+        <key code="0x0000004E" vkcode="VK_n"/>
+        <key code="0x0000004F" vkcode="VK_o"/>
+        <key code="0x00000050" vkcode="VK_p"/>
+        <key code="0x00000051" vkcode="VK_q"/>
+        <key code="0x00000052" vkcode="VK_r"/>
+        <key code="0x00000053" vkcode="VK_s"/>
+        <key code="0x00000054" vkcode="VK_t"/>
+        <key code="0x00000055" vkcode="VK_u"/>
+        <key code="0x00000056" vkcode="VK_v"/>
+        <key code="0x00000057" vkcode="VK_w"/>
+        <key code="0x00000058" vkcode="VK_x"/>
+        <key code="0x00000059" vkcode="VK_y"/>
+        <key code="0x0000005A" vkcode="VK_z"/>
+        <!-- A-Z uppercase -->
+        <key code="0x00000041" vkcode="VK_A"/>
+        <key code="0x00000042" vkcode="VK_B"/>
+        <key code="0x00000043" vkcode="VK_C"/>
+        <key code="0x00000044" vkcode="VK_D"/>
+        <key code="0x00000045" vkcode="VK_E"/>
+        <key code="0x00000046" vkcode="VK_F"/>
+        <key code="0x00000047" vkcode="VK_G"/>
+        <key code="0x00000048" vkcode="VK_H"/>
+        <key code="0x00000049" vkcode="VK_I"/>
+        <key code="0x0000004A" vkcode="VK_J"/>
+        <key code="0x0000004B" vkcode="VK_K"/>
+        <key code="0x0000004C" vkcode="VK_L"/>
+        <key code="0x0000004D" vkcode="VK_M"/>
+        <key code="0x0000004E" vkcode="VK_N"/>
+        <key code="0x0000004F" vkcode="VK_O"/>
+        <key code="0x00000050" vkcode="VK_P"/>
+        <key code="0x00000051" vkcode="VK_Q"/>
+        <key code="0x00000052" vkcode="VK_R"/>
+        <key code="0x00000053" vkcode="VK_S"/>
+        <key code="0x00000054" vkcode="VK_T"/>
+        <key code="0x00000055" vkcode="VK_U"/>
+        <key code="0x00000056" vkcode="VK_V"/>
+        <key code="0x00000057" vkcode="VK_W"/>
+        <key code="0x00000058" vkcode="VK_X"/>
+        <key code="0x00000059" vkcode="VK_Y"/>
+        <key code="0x0000005A" vkcode="VK_Z"/>
+		
+        <key code="0x10000061" vkcode="VK_HELP"/>
+        <key code="0x00000023" vkcode="VK_HASH"/>
+        <key code="0x0000002A" vkcode="VK_ASTERISK"/>
+        <key code="0x10000081" vkcode="VK_FAVORITES"/>
+        <key code="0x10000090" vkcode="VK_MUTE"/>
+        <key code="0x10000091" vkcode="VK_VOL_DOWN"/>
+        <key code="0x10000092" vkcode="VK_VOL_UP"/>
+        <key code="0x10000018" vkcode="VK_SKIP_BACK"/>
+        <key code="0x10000050" vkcode="VK_RED"/>
+        <key code="0x10000051" vkcode="VK_GREEN"/>
+        <key code="0x10000052" vkcode="VK_YELLOW"/>
+        <key code="0x10000053" vkcode="VK_BLUE"/>
+        <key code="0x10000014" vkcode="VK_REWIND"/>
+        <key code="0x10000011" vkcode="VK_STOP"/>
+        <key code="0x10000010" vkcode="VK_PLAY"/>
+        <key code="0x10000070" vkcode="VK_RECORD"/>
+        <key code="0x10000013" vkcode="VK_FAST_FWD"/>
+        <key code="0x10000021" vkcode="VK_PREV"/>
+        <key code="0x10000020" vkcode="VK_NEXT"/>
+        <key code="0x10000040" vkcode="VK_CHANNEL_UP"/>
+        <key code="0x10000041" vkcode="VK_CHANNEL_DOWN"/>
+        <key code="0x10000060" vkcode="VK_INFO"/>
+        <key code="0x10000080" vkcode="VK_GUIDE"/>
+	<key code="0x1000003C" vkcode="VK_TTX"/>
+        <key code="0x10000032" vkcode="VK_MENU"/>
+        <key code="0x10000037" vkcode="VK_LIVE"/>
+        <key code="0x10000031" vkcode="VK_EXIT"/>
+        <key code="0x10000036" vkcode="VK_MYDVR"/>
+        <key code="0x10000030" vkcode="VK_SETUP"/>
+        <key code="0x10000034" vkcode="VK_TOPMENU"/>
+        <key code="0x10000033" vkcode="VK_NETTV"/>
+        <key code="0x10000038" vkcode="VK_MEDIA"/>
+        <key code="0x10000035" vkcode="VK_ONDEMAND"/>
+        <key code="0x10000015" vkcode="VK_SKIP_FWD"/>
+        <key code="0x10000016" vkcode="VK_REPLAY"/>
+        <key code="0x10000023" vkcode="VK_LIST"/>
+        <key code="0x10000082" vkcode="VK_DAYUP"/>
+        <key code="0x10000083" vkcode="VK_DAYDOWN"/>
+        <key code="0x10000017" vkcode="VK_PLAYPAUSE"/>
+		<key code="0x10000102" vkcode="VK_LANGUAGE"/>
+        <key code="0x10000039" vkcode="VK_SETTINGS"/>
+        <key code="0x10000054" vkcode="VK_OEMA"/>
+        <key code="0x10000055" vkcode="VK_OEMB"/>
+        <key code="0x10000056" vkcode="VK_OEMC"/>
+        <key code="0x10000057" vkcode="VK_OEMD"/>
+		<key code="0x1000003B" vkcode="VK_MOVIE"/>
+		<key code="0x1000003D" vkcode="VK_DIGITALTV"/>
+		<key code="0x10000100" vkcode="VK_TRIANGLE"/>
+		<key code="0x10000101" vkcode="VK_HEXAGON"/>
+		<key code="0x1000003A" vkcode="VK_RADIO"/>
+		<key code="0x10000120" vkcode="VK_SPORTS"/>
+		<key code="0x10000121" vkcode="VK_KIDS"/>
+		<key code="0x10000122" vkcode="VK_NEWS"/>
+        <key code="0x10000002" vkcode="VK_SEARCH"/>
+		<key code="0x10000003" vkcode="VK_OPTIONS"/>
+	</keymap>
+</keymaps>

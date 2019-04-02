@@ -1,0 +1,1286 @@
+=========** CSM **===========
+/etc/opt/csm/devices.xml
+-----------------------------
+<?xml version="1.0" encoding="utf-8"?>
+
+<CloudTVDevices xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.avnetworks.com/Devices">
+
+  <deviceClasses>
+
+<!-- Default Codec Profile -->
+
+		<configitem name="supportedDisplays" type="string">hd720</configitem>
+		<configitem name="videoCodec" type="string">mpeg2</configitem>
+		<configitem name="audioCodec" type="string">ac3</configitem>
+		<configitem name="abps" type="int">128</configitem>
+		<configitem name="achannels" type="int">2</configitem>
+		<configitem name="bitrateMode" type="string">vbr</configitem>
+
+<!---<configitem name="deviceBitrate" type="int">NO DEFAULT, use to override bitrate from programs.xml</configitem>-->
+
+<!-- Default Stream Profile -->
+
+		<configitem name="TSProgramID" type="int">1</configitem>
+		<configitem name="TSProgramPID" type="int">64</configitem>
+		<configitem name="TSVideoPID" type="int">65</configitem>
+		<configitem name="TSAudioPID" type="int">66</configitem>
+		<configitem name="TSPcrPID" type="int">67</configitem>
+		<configitem name="initialIFrames" type="int">5</configitem>
+		<configitem name="sessionTsPsiInterval" type="int">1</configitem>
+
+<!-- Default overlays -->
+
+		<configitem name="overlayEncodings" type="string">png</configitem>
+
+		<configitem name="handoffuris" type="string">tv,si,hls,cable,dash,mss,app,url,http+pd</configitem>
+
+<!--
+    +++++++++++++++++++++++++++++++++++++++++++++++++++
+           Cable Transport (QAM)
+    +++++++++++++++++++++++++++++++++++++++++++++++++++
+-->
+
+	<deviceClass name="CableTransport">
+		<configitem name="deviceProfile" type="string">file:///profiles/qam.xml</configitem>
+		<configitem name="supportedDisplays" type="string">hd720,ntsc</configitem>
+		<configitem name="transport" type="string">udp</configitem>
+		<configitem name="allocateResources" type="bool">true</configitem>
+		<configitem name="RMax" type="int">50</configitem>
+		<configitem name="initialIFrames" type="int">2</configitem>
+		<configitem name="initialIFrameSpacing" type="int">30</configitem>
+		<configitem name="intraMbRefreshRate" type="int">125000</configitem>
+		<configitem name="intraMbRefreshTimeout" type="int">120</configitem>
+		<configitem type="string" name="bufferingStream">0.000</configitem>
+<!-- Streaming Profile -->
+
+		<configitem name="bitrateMode" type="string">vbr</configitem>
+		<configitem name="TSProgramPID" type="int">480</configitem>
+		<configitem name="TSVideoPID" type="int">481</configitem>
+		<configitem name="TSAudioPID" type="int">482</configitem>
+		<configitem name="TSPcrPID" type="int">481</configitem>
+		<deviceClass name="StandardCableClient">
+<!-- Default overlays -->
+
+			<configitem name="overlayEncodings" type="string">png</configitem>
+			<configitem name="handoffuris" type="string">tv,si,app</configitem>
+			
+			<!-- <configitem name="sessionDebug" type="string">/var/tmp/%S_debug_%D.ts</configitem> -->
+      
+		</deviceClass>
+      
+<!-- Generic device base class (group 1) -->
+
+		<deviceClass name="GenericDevice">
+			<configitem name="deviceGroup" type="int">1</configitem>
+			<configitem name="generateKeyUps" type="bool">true</configitem>
+			<deviceClass name="UnknownCableSTB">
+				<configitem name="manufacturerID" type="int">255</configitem>
+				<configitem name="modelID" type="int">0</configitem>
+				<configitem name="vendor" type="string">unknown</configitem>
+			</deviceClass>
+
+		</deviceClass>
+
+<!-- Generic Pace box base class (group 2) -->
+
+		<deviceClass name="GenericPace">
+			<configitem name="deviceGroup" type="int">2</configitem>
+			<configitem name="aspect" type="string">dar</configitem>
+			<configitem name="keyMap" type="string">MotorolaStandard</configitem>
+			<configitem name="vendor" type="string">Pace</configitem>
+			<configitem name="manufacturerID" type="int">12</configitem>
+			<configitem name="generateKeyUps" type="bool">true</configitem>
+
+<!-- This is the default modelId used for requests that specify a model id not available -->
+
+			<deviceClass name="DEFAULT-PACE">
+				<configitem name="modelID" type="int">0</configitem>
+			</deviceClass>
+
+			<deviceClass name="TDC575D">
+				<configitem name="modelID" type="int">1283</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="TDC577X">
+				<configitem name="modelID" type="int">1288</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="RNG110">
+				<configitem name="modelID" type="int">1301</configitem>
+			</deviceClass>
+
+			<deviceClass name="RNG200N">
+				<configitem name="modelID" type="int">1304</configitem>
+			</deviceClass>
+			
+			<deviceClass name="RNG110A">
+				<configitem name="modelID" type="int">1308</configitem>
+			</deviceClass>
+
+			<deviceClass name="RNG150">
+				<configitem name="modelID" type="int">1309</configitem>
+			</deviceClass>
+
+			<deviceClass name="DC550 Series">
+				<configitem name="modelID" type="int">1319</configitem>
+			</deviceClass>
+	
+			<deviceClass name="DC550D Series">
+				<configitem name="modelID" type="int">1307</configitem>
+			</deviceClass>
+						
+<!--  The following device model ID is used by HD Moto STB clients to launch SD sessions-->
+
+			<deviceClass name="Pace HD-to-SD resolution switch fake device">
+				<configitem name="modelID" type="int">2999</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+		</deviceClass>
+
+<!-- Generic Motorola box base class (group 3) -->
+
+		<deviceClass name="GenericMotorola">
+			<configitem name="deviceGroup" type="int">3</configitem>
+			<configitem name="aspect" type="string">dar</configitem>
+			<configitem name="keyMap" type="string">MotorolaStandard</configitem>
+			<configitem name="vendor" type="string">Motorola</configitem>
+			<configitem name="manufacturerID" type="int">9</configitem>
+			<configitem name="generateKeyUps" type="bool">true</configitem>
+
+<!-- This is the default modelId used for requests that specify a model id not available -->
+
+			<deviceClass name="DEFAULT-MOTOROLA">
+				<configitem name="modelID" type="int">0</configitem>
+			</deviceClass>
+
+<!--  Beginning of list of Moto STB models that are not in the TVWorks document, but were in AVN's devices.xml -->
+
+			<deviceClass name="DCT-700 Series">
+				<configitem name="modelID" type="int">1</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-1000 Series">
+				<configitem name="modelID" type="int">2</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-1200 Series">
+				<configitem name="modelID" type="int">3</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-1700 Series">
+				<configitem name="modelID" type="int">4</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-1800 Series">
+				<configitem name="modelID" type="int">5</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-2000 Series">
+				<configitem name="modelID" type="int">6</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-2500 Series">
+				<configitem name="modelID" type="int">7</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-2000 Series">
+				<configitem name="modelID" type="int">8</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-2000 Series">
+				<configitem name="modelID" type="int">9</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+			
+			<deviceClass name="DCT-6100 Series">
+				<configitem name="modelID" type="int">10</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-6200 Series">
+				<configitem name="modelID" type="int">11</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-6200 Series">
+				<configitem name="modelID" type="int">12</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-6400 Series">
+				<configitem name="modelID" type="int">13</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-2000 Series">
+				<configitem name="modelID" type="int">16</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-2000 Series">
+				<configitem name="modelID" type="int">17</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-2000 Series">
+				<configitem name="modelID" type="int">18</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+			
+			<deviceClass name="DCT-2500 Series">
+				<configitem name="modelID" type="int">80</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-2500 Series">
+				<configitem name="modelID" type="int">81</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-2500 Series">
+				<configitem name="modelID" type="int">82</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-2524">
+				<configitem name="modelID" type="int">83</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-2524">
+				<configitem name="modelID" type="int">84</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-1700 Series">
+				<configitem name="modelID" type="int">85</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-1800 Series">
+				<configitem name="modelID" type="int">86</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-1800 Series">
+				<configitem name="modelID" type="int">87</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-1800 Series">
+				<configitem name="modelID" type="int">88</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-1800 Series">
+				<configitem name="modelID" type="int">89</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-1800 Series">
+				<configitem name="modelID" type="int">90</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-1800 Series">
+				<configitem name="modelID" type="int">91</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-1800 Series">
+				<configitem name="modelID" type="int">92</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-1800 Series">
+				<configitem name="modelID" type="int">93</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-1800 Series">
+				<configitem name="modelID" type="int">94</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-1800 Series">
+				<configitem name="modelID" type="int">95</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-1700 Series">
+				<configitem name="modelID" type="int">96</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-1800 Series">
+				<configitem name="modelID" type="int">97</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-1700 Series">
+				<configitem name="modelID" type="int">98</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-1700 Series">
+				<configitem name="modelID" type="int">99</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-1800 Series">
+				<configitem name="modelID" type="int">100</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-700 Series">
+				<configitem name="modelID" type="int">102</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-700 Series">
+				<configitem name="modelID" type="int">103</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-700 Series">
+				<configitem name="modelID" type="int">104</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-1700 Series">
+				<configitem name="modelID" type="int">105</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCH 70">
+				<configitem name="modelID" type="int">106</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-700 Series">
+				<configitem name="modelID" type="int">107</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-2500 Series">
+				<configitem name="modelID" type="int">108</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-1800 Series">
+				<configitem name="modelID" type="int">109</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-700 Series">
+				<configitem name="modelID" type="int">176</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-700 Series">
+				<configitem name="modelID" type="int">177</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-700 Series">
+				<configitem name="modelID" type="int">178</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-700 Series">
+				<configitem name="modelID" type="int">179</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-700 Series">
+				<configitem name="modelID" type="int">180</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-700 Series">
+				<configitem name="modelID" type="int">181</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-700 Series">
+				<configitem name="modelID" type="int">182</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-700 Series">
+				<configitem name="modelID" type="int">183</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-700 Series">
+				<configitem name="modelID" type="int">184</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-700 Series">
+				<configitem name="modelID" type="int">185</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-700 Series">
+				<configitem name="modelID" type="int">186</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-700 Series">
+				<configitem name="modelID" type="int">187</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-700 Series">
+				<configitem name="modelID" type="int">188</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-700 Series">
+				<configitem name="modelID" type="int">189</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-700 Series">
+				<configitem name="modelID" type="int">190</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-700 Series">
+				<configitem name="modelID" type="int">191</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-2500 Series">
+				<configitem name="modelID" type="int">224</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-2500 Series">
+				<configitem name="modelID" type="int">225</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-2500 Series">
+				<configitem name="modelID" type="int">226</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-2500 Series">
+				<configitem name="modelID" type="int">227</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-2500 Series">
+				<configitem name="modelID" type="int">228</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-2500 Series">
+				<configitem name="modelID" type="int">229</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-2224">
+				<configitem name="modelID" type="int">230</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-2500 Series">
+				<configitem name="modelID" type="int">231</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-2500 Series">
+				<configitem name="modelID" type="int">232</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-2500 Series">
+				<configitem name="modelID" type="int">233</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-2500 Series">
+				<configitem name="modelID" type="int">234</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-2500 Series">
+				<configitem name="modelID" type="int">235</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-2500 Series">
+				<configitem name="modelID" type="int">236</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-2500 Series">
+				<configitem name="modelID" type="int">237</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-2500 Series">
+				<configitem name="modelID" type="int">238</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-2500 Series">
+				<configitem name="modelID" type="int">239</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-6200 Series">
+				<configitem name="modelID" type="int">262</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-6400 Series">
+				<configitem name="modelID" type="int">512</configitem>
+				<configitem name="supportedDisplays" type="string">hd720,ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-3400 Series">
+				<configitem name="modelID" type="int">516</configitem>
+				<configitem name="supportedDisplays" type="string">hd720,ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-5100 Series">
+				<configitem name="modelID" type="int">599</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-5100 Series">
+				<configitem name="modelID" type="int">601</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-6200 Series">
+				<configitem name="modelID" type="int">602</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-6200 Series">
+				<configitem name="modelID" type="int">605</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-6400 Series">
+				<configitem name="modelID" type="int">606</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-6400 Series">
+				<configitem name="modelID" type="int">607</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-6200 Series">
+				<configitem name="modelID" type="int">610</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-6200 Series">
+				<configitem name="modelID" type="int">611</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-6400 Series">
+				<configitem name="modelID" type="int">612</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-6400 Series">
+				<configitem name="modelID" type="int">613</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-6400 Series">
+				<configitem name="modelID" type="int">614</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-6400 Series">
+				<configitem name="modelID" type="int">615</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-6400 Series">
+				<configitem name="modelID" type="int">616</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-6400 Series">
+				<configitem name="modelID" type="int">617</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-6400 Series">
+				<configitem name="modelID" type="int">618</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-6400 Series">
+				<configitem name="modelID" type="int">619</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-6400 Series">
+				<configitem name="modelID" type="int">620</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-3400 Series">
+				<configitem name="modelID" type="int">704</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-3400 Series">
+				<configitem name="modelID" type="int">705</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-3400 Series">
+				<configitem name="modelID" type="int">706</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-3400 Series">
+				<configitem name="modelID" type="int">707</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-3400 Series">
+				<configitem name="modelID" type="int">708</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-3400 Series">
+				<configitem name="modelID" type="int">709</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-3400 Series">
+				<configitem name="modelID" type="int">710</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-3400 Series">
+				<configitem name="modelID" type="int">711</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-3400 Series">
+				<configitem name="modelID" type="int">712</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-6200 Series">
+				<configitem name="modelID" type="int">713</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-6200 Series">
+				<configitem name="modelID" type="int">714</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-6200 Series">
+				<configitem name="modelID" type="int">715</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-6200 Series">
+				<configitem name="modelID" type="int">716</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-6200 Series">
+				<configitem name="modelID" type="int">717</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-6200 Series">
+				<configitem name="modelID" type="int">718</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCT-6200 Series">
+				<configitem name="modelID" type="int">719</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCH-100 Series">
+				<configitem name="modelID" type="int">738</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCH-200 Series">
+				<configitem name="modelID" type="int">748</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCH-70 Series">
+				<configitem name="modelID" type="int">758</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCH-70 Series">
+				<configitem name="modelID" type="int">759</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCH-70 Series">
+				<configitem name="modelID" type="int">760</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCX-100 Series">
+				<configitem name="modelID" type="int">2048</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCX-100 Series">
+				<configitem name="modelID" type="int">2049</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCX-3200 Series">
+				<configitem name="modelID" type="int">2050</configitem>
+				<configitem name="supportedDisplays" type="string">hd720,ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCX-3200 Series">
+				<configitem name="modelID" type="int">2051</configitem>
+				<configitem name="supportedDisplays" type="string">hd720,ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCX-3200 Series">
+				<configitem name="modelID" type="int">2052</configitem>
+				<configitem name="supportedDisplays" type="string">hd720,ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCX-3400 Series">
+				<configitem name="modelID" type="int">2053</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCX-3200 Series">
+				<configitem name="modelID" type="int">2054</configitem>
+				<configitem name="supportedDisplays" type="string">hd720,ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCX-3200 Series">
+				<configitem name="modelID" type="int">2055</configitem>
+				<configitem name="supportedDisplays" type="string">hd720,ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCX-700 Series">
+				<configitem name="modelID" type="int">2059</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCX-3400 Series">
+				<configitem name="modelID" type="int">2062</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCX-3500 Series">
+				<configitem name="modelID" type="int">2066</configitem>
+				<configitem name="supportedDisplays" type="string">hd720,ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCX-3500 Series">
+				<configitem name="modelID" type="int">2067</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCX-3200 Series">
+				<configitem name="modelID" type="int">2070</configitem>
+				<configitem name="supportedDisplays" type="string">hd720,ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCX-3510-M">
+				<configitem name="modelID" type="int">2071</configitem>
+				<configitem name="supportedDisplays" type="string">hd720,ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCX-3510e-M">
+				<configitem name="modelID" type="int">2074</configitem>
+				<configitem name="supportedDisplays" type="string">hd720,ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCX-3220e">
+				<configitem name="modelID" type="int">2075</configitem>
+				<configitem name="initialIFrameSpacing" type="int">39</configitem>
+				<configitem name="supportedDisplays" type="string">hd720,ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="DCX-3520e-M">
+				<!--configitem name="sessionDebug" type="string">/tmp/%S_debug.ts</configitem-->
+				<configitem name="modelID" type="int">2076</configitem>
+				<configitem name="supportedDisplays" type="string">hd720,ntsc</configitem>
+			</deviceClass>
+
+<!--  The following device model ID is used by HD Moto STB clients to launch SD sessions-->
+
+			<deviceClass name="Moto HD-to-SD resolution switch fake device">
+				<configitem name="modelID" type="int">2999</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+		</deviceClass>
+
+<!-- Generic Scientific Atlanta box base class (group 4) -->
+
+		<deviceClass name="GenericScientificAtlanta">
+			<configitem name="keyMap" type="string">SAStandard</configitem>
+			<configitem name="vendor" type="string">Scientific Atlanta</configitem>
+			<configitem name="deviceGroup" type="int">4</configitem>
+			<configitem name="manufacturerID" type="int">1</configitem>
+			<configitem name="generateKeyUps" type="bool">true</configitem>
+
+<!-- This is the default modelId used for requests that specify a model id not available -->
+
+			<deviceClass name="DEFAULT-SA">
+				<configitem name="modelID" type="int">0</configitem>
+			</deviceClass>
+
+			<deviceClass name="SA-PTV-OS3">
+				<configitem name="modelID" type="int">1</configitem>
+			</deviceClass>
+
+			<deviceClass name="SA-1850">
+				<configitem name="modelID" type="int">2</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="SA-3250/SA-4200">
+				<configitem name="modelID" type="int">8</configitem>
+			</deviceClass>
+
+			<deviceClass name="SA-SD">
+				<configitem name="modelID" type="int">9</configitem>
+				<configitem name="supportedDisplays" type="string">ntsc</configitem>
+			</deviceClass>
+
+			<deviceClass name="SA-8010">
+				<configitem name="modelID" type="int">10</configitem>
+			</deviceClass>
+
+			<deviceClass name="SA-8300">
+				<configitem name="modelID" type="int">11</configitem>
+			</deviceClass>
+
+			<deviceClass name="SA-HD">
+				<configitem name="modelID" type="int">15</configitem>
+			</deviceClass>
+
+			<deviceClass name="SA-FAKEHD">
+				<configitem name="modelID" type="int">12</configitem>
+				<configitem name="TSLogPID" type="int">68</configitem>
+			</deviceClass>
+			
+			<deviceClass name="SA-4250HDC">
+				<configitem name="modelID" type="int">4300</configitem>
+			</deviceClass>
+			
+			<deviceClass name="SA-4640HDC">
+				<configitem name="modelID" type="int">4640</configitem>
+			</deviceClass>
+
+			<deviceClass name="SA-4642HD">
+				<configitem name="modelID" type="int">4642</configitem>
+			</deviceClass>
+
+			<deviceClass name="SA-4650HDC">
+				<configitem name="modelID" type="int">4300</configitem>
+			</deviceClass>
+
+			<deviceClass name="SA-8642HD">
+				<configitem name="modelID" type="int">8642</configitem>
+			</deviceClass>
+			
+		</deviceClass>
+
+<!-- Generic Worldbox base class (group 5) -->
+		<deviceClass name="GenericWorldbox">
+			<configitem name="deviceGroup" type="int">5</configitem>
+			<configitem name="manufacturerID" type="int">2</configitem>
+			<configitem name="vendor" type="string">Humax</configitem>
+			<configitem name="supportedDisplays" type="string">hd720,ntsc</configitem>
+			<configitem name="initialIFrames" type="int">2</configitem>
+			<configitem name="initialIFrameSpacing" type="int">30</configitem>
+			<configitem name="intraMbRefreshRate" type="int">125000</configitem>
+			<configitem name="intraMbRefreshTimeout" type="int">120</configitem>
+			<configitem name="odaName" type="string">nextgen</configitem>
+			<configitem name="generateKeyUps" type="bool">true</configitem>
+
+			<deviceClass name="Spectrum 100-H">
+				<configitem name="modelID" type="int">100</configitem>
+			</deviceClass>
+
+			<deviceClass name="Spectrum 200-H">
+				<configitem name="modelID" type="int">200</configitem>
+			<configitem name="sessionDebug" type="string">/var/tmp2/Session_debug_%S.ts</configitem>
+			</deviceClass>
+
+		</deviceClass>
+
+<!-- Guide OVER DOCSIS Specifc -->
+
+		<deviceClass name="TechnicolorDOCSIS">
+                <configitem name="videoCodec" type="string">avc</configitem>
+                <configitem name="odaName" type="string">nextgen</configitem>
+                <configitem name="clientIDPattern" type="string">^Technicolor-.*</configitem>
+                <configitem name="TSProgramPID" type="int">480</configitem>
+                <configitem name="TSVideoPID" type="int">481</configitem>
+                <configitem name="TSAudioPID" type="int">482</configitem>
+                <configitem name="TSPcrPID" type="int">481</configitem>
+                <configitem name="allocateResources" type="bool">true</configitem>
+                <configitem name="transport" type="string">http</configitem>
+                <!-- Number of black I-Frames to send at the start of the session -->
+                <configitem name="initialIFrames" type="int">2</configitem>
+                <!-- Number of black P-Frames to pad in between each of the starting I-Frames -->
+                <configitem name="initialIFrameSpacing" type="int">30</configitem>
+                <configitem name="bufferingStream" type="string">0.035</configitem>
+                <configitem name="bitrateMode" type="string">vbr</configitem>
+                <configitem name="clientUnderrunMitigation" type="bool">true</configitem>
+                <!-- <configitem name="sessionDebug" type="string">/var/tmp/tch/%S_debug_%D.ts</configitem> -->
+            </deviceClass>
+
+			
+			 <deviceClass name="ArrisDOCSIS">
+                <configitem name="videoCodec" type="string">avc</configitem>
+                <configitem name="odaName" type="string">nextgen</configitem>
+                <configitem name="clientIDPattern" type="string">^Arris-.*</configitem>
+                <configitem name="TSProgramPID" type="int">480</configitem>
+                <configitem name="TSVideoPID" type="int">481</configitem>
+                <configitem name="TSAudioPID" type="int">482</configitem>
+                <configitem name="TSPcrPID" type="int">481</configitem>
+                <configitem name="allocateResources" type="bool">true</configitem>
+                <configitem name="transport" type="string">http</configitem>
+                <!-- Number of black I-Frames to send at the start of the session -->
+                <configitem name="initialIFrames" type="int">2</configitem>
+                <!-- Number of black P-Frames to pad in between each of the starting I-Frames -->
+                <configitem name="initialIFrameSpacing" type="int">30</configitem>
+                <configitem name="bufferingStream" type="string">0.035</configitem>
+                <configitem name="bitrateMode" type="string">vbr</configitem>
+                <configitem name="clientUnderrunMitigation" type="bool">true</configitem>
+                <!-- <configitem name="sessionDebug" type="string">/var/tmp/tch/%S_debug_%D.ts</configitem> -->
+            </deviceClass>
+
+            <deviceClass name="Motorola DOCSIS">
+		<configitem name="supportedDisplays" type="string">hd720,ntsc</configitem>
+		<configitem name="odaName" type="string">nextgen</configitem>
+                <configitem name="clientIDPattern" type="string">^Moto-2075.*</configitem>
+                <configitem name="TSProgramPID" type="int">480</configitem>
+                <configitem name="TSVideoPID" type="int">481</configitem>
+                <configitem name="TSAudioPID" type="int">482</configitem>
+                <configitem name="TSPcrPID" type="int">481</configitem>
+                <configitem name="allocateResources" type="bool">true</configitem>
+                <configitem name="transport" type="string">http</configitem>
+                <!-- Number of black I-Frames to send at the start of the session -->
+                <configitem name="initialIFrames" type="int">30</configitem>
+                <!-- Number of black P-Frames to pad in between each of the starting I-Frames -->
+                <configitem name="initialIFrameSpacing" type="int">5</configitem>
+                <configitem name="bufferingStream" type="string">0.035</configitem>
+                <configitem name="bitrateMode" type="string">cbr</configitem>
+           </deviceClass>
+           <deviceClass name="Humax DOCSIS">
+		<configitem name="supportedDisplays" type="string">hd720,ntsc</configitem>
+		<configitem name="videoCodec" type="string">avc</configitem>
+                <configitem name="odaName" type="string">nextgen</configitem>
+                <configitem name="clientIDPattern" type="string">^Humax-.*</configitem>
+                <configitem name="TSProgramPID" type="int">480</configitem>
+                <configitem name="TSVideoPID" type="int">481</configitem>
+                <configitem name="TSAudioPID" type="int">482</configitem>
+                <configitem name="TSPcrPID" type="int">481</configitem>
+                <configitem name="allocateResources" type="bool">true</configitem>
+                <configitem name="transport" type="string">http</configitem>
+                <!-- Number of black I-Frames to send at the start of the session -->
+                <configitem name="initialIFrames" type="int">2</configitem>
+                <!-- Number of black P-Frames to pad in between each of the starting I-Frames -->
+                <configitem name="initialIFrameSpacing" type="int">30</configitem>
+                <configitem name="bufferingStream" type="string">0.035</configitem>
+                <configitem name="bitrateMode" type="string">vbr</configitem>
+                <configitem name="clientUnderrunMitigation" type="bool">true</configitem>
+                <configitem name="sessionDebug" type="string">/var/tmp/humax/%S_debug_%D.ts</configitem>
+
+           </deviceClass>
+
+           <deviceClass name="Cisco DOCSIS">
+		<configitem name="supportedDisplays" type="string">hd720,ntsc</configitem>
+                <configitem name="odaName" type="string">nextgen</configitem>
+                <configitem name="clientIDPattern" type="string">^CISCO-8640.*</configitem>
+                <configitem name="TSProgramPID" type="int">480</configitem>
+                <configitem name="TSVideoPID" type="int">481</configitem>
+                <configitem name="TSAudioPID" type="int">482</configitem>
+                <configitem name="TSPcrPID" type="int">481</configitem>
+                <configitem name="allocateResources" type="bool">true</configitem>
+                <configitem name="transport" type="string">http</configitem>
+                <!-- Number of black I-Frames to send at the start of the session -->
+                <configitem name="initialIFrames" type="int">30</configitem>
+                <!-- Number of black P-Frames to pad in between each of the starting I-Frames -->
+                <configitem name="initialIFrameSpacing" type="int">5</configitem>
+                <configitem name="bufferingStream" type="string">0.035</configitem>
+                <configitem name="bitrateMode" type="string">cbr</configitem>
+           </deviceClass>
+           <deviceClass name="Cisco DOCSIS CTVP VOD">
+		<configitem name="supportedDisplays" type="string">hd720,ntsc</configitem>
+                <configitem name="odaName" type="string">avn</configitem>
+                <configitem name="clientIDPattern" type="string">^Cisco-8640.*</configitem>
+                <configitem name="TSProgramPID" type="int">480</configitem>
+                <configitem name="TSVideoPID" type="int">481</configitem>
+                <configitem name="TSAudioPID" type="int">482</configitem>
+                <configitem name="TSPcrPID" type="int">481</configitem>
+                <configitem name="allocateResources" type="bool">true</configitem>
+                <configitem name="transport" type="string">http</configitem>
+                <!-- Number of black I-Frames to send at the start of the session -->
+                <configitem name="initialIFrames" type="int">30</configitem>
+                <!-- Number of black P-Frames to pad in between each of the starting I-Frames -->
+                <configitem name="initialIFrameSpacing" type="int">5</configitem>
+                <configitem name="bufferingStream" type="string">0.035</configitem>
+                <configitem name="bitrateMode" type="string">vbr</configitem>
+           </deviceClass>
+
+
+	</deviceClass>
+
+<!-- Cable Transport -->
+
+<!--
+    +++++++++++++++++++++++++++++++++++++++++++++++++++
+        IPTV transport (MPEG over UDP)
+    +++++++++++++++++++++++++++++++++++++++++++++++++++
+-->
+
+	<deviceClass name="IPTVTransport">
+		<configitem name="transport" type="string">udp</configitem>
+
+<!-- Streaming Profile -->
+
+		<configitem name="bitrateMode" type="string">vbr</configitem>
+		<configitem name="intraMbRefreshRate" type="int">100000</configitem>
+		<configitem name="intraMbRefreshTimeout" type="int">30</configitem>
+
+<!-- Packet pacing options -->
+
+		<configitem name="RMax" type="int">80</configitem>
+		<configitem name="PMax" type="int">8</configitem>
+		<deviceClass name="StandardIPTVClient">
+		</deviceClass>
+
+<!--
+	+++++++++++++++++++++++++++++++++++++++++++++++++++
+		RTSP Clients - start
+	+++++++++++++++++++++++++++++++++++++++++++++++++++
+-->
+
+		<deviceClass name="StandardRTSPClient">
+			<configitem name="videoCodec" type="string">mpeg2</configitem>
+			<configitem name="audioCodec" type="string">mp2</configitem>
+			<configitem name="RMax" type="int">20</configitem>
+
+<!-- whether or not to return an SDP description in response to the SETUP request -->
+
+			<configitem name="useSdpInSetup" type="bool">false</configitem>
+
+<!--
+			whether or not to use RFC2326 compliant session ID. The RTSP RFC specifies that a SessionId
+			has the following format:
+			session-id = 1* ( ALPHA | DIGIT | safe )
+			If not set, the returned sessionId is that of the USM (which is not compliant as it contains
+			dashes) which simplifies session tracking in the cloudtv.log.
+-->
+
+			<configitem name="useRfc2326CompliantSessionID" type="bool">false</configitem>
+
+<!--
+			keep-alive timer for the RTSP clients. If they do not issue a GET_PARAMATER or ANNOUNCE
+			within the specified timeout, the server will terminate the session
+-->
+
+			<configitem name="sessionTimeout" type="int">30</configitem>
+			
+<!-- Amino A140 specific -->
+
+			<deviceClass name="AminoA140">
+				<configitem name="clientIDPattern" type="string">^ax4x_amino.*</configitem>
+				<configitem name="supportedDisplays" type="string">hd720</configitem>
+			</deviceClass>
+
+<!-- Amino A130 specific -->
+
+			<deviceClass name="AminoA130">
+				<configitem name="clientIDPattern" type="string">^a130_amino.*</configitem>
+				<configitem name="supportedDisplays" type="string">hd720</configitem>
+			</deviceClass>
+
+<!-- Amino A110 specific -->
+
+			<deviceClass name="AminoA110">
+				<configitem name="clientIDPattern" type="string">^a110_amino.*</configitem>
+				<configitem name="supportedDisplays" type="string">pal16x9</configitem>
+				<configitem name="audioDropInterval" type="int">50</configitem>
+				<configitem name="initialIFrames" type="int">20</configitem>
+				<configitem name="bitrate" type="int">20500000</configitem>
+
+<!-- Amino 110 requires compliant RTSP SessionId's -->
+
+				<configitem name="useRfc2326CompliantSessionID" type="bool">true</configitem>
+			</deviceClass>
+		</deviceClass>
+
+<!--
+	+++++++++++++++++++++++++++++++++++++++++++++++++++
+		RTSP Clients - end
+	+++++++++++++++++++++++++++++++++++++++++++++++++++
+-->
+
+	</deviceClass>
+
+<!-- IPTV Transport -->
+<!--
+    +++++++++++++++++++++++++++++++++++++++++++++++++++
+        Over-the-top (OTT) delivery, typically used in
+        Broadband Connected Device (BCD)
+    +++++++++++++++++++++++++++++++++++++++++++++++++++
+-->
+
+	<deviceClass name="BCDTransport">
+		<configitem name="transport" type="string">http</configitem>
+		<configitem name="videoCodec" type="string">h264</configitem>
+		<configitem name="audioCodec" type="string">ac3</configitem>
+		<configitem name="multi" type="string">1.0,0.8,0.4</configitem>
+
+<!-- Adaptive Bitrate settings -->
+
+		<configitem name="bitrateUp" type="string">1.0</configitem>
+		<configitem name="bitrateDown" type="string">1.0</configitem>
+		<configitem name="maxClientLatency" type="int">5000</configitem>
+
+		<deviceClass name="funai">
+
+<!-- Bluray specific stream settings -->
+
+			<configitem name="supportedDisplays" type="string">720p29.97</configitem>
+			<configitem name="TSProgramPID" type="int">256</configitem>
+			<configitem name="TSPcrPID" type="int">4097</configitem>
+			<configitem name="TSVideoPID" type="int">4113</configitem>
+			<configitem name="TSAudioPID" type="int">4352</configitem>
+			<configitem name="TSPmtProgramInfo" type="string">05 04 48 44 4d 56 88 04 0f ff fc fc</configitem>
+			<configitem name="TSPmtVideoInfo" type="string">05 08 48 44 4d 56 ff 1b 43 3f</configitem>
+			<configitem name="TSTablePid" type="int">31</configitem>
+			<configitem name="TSTableProgram" type="int">0</configitem>
+			<configitem name="TSTableBytes" type="string">7f f0 19 ff ff c1 00 00 f0 0a 63 08 c0 af c8 ff ff ff ff ff 00 01 80 00</configitem>
+			<configitem name="videoDropInterval" type="int">4</configitem>
+			<configitem name="audioDropInterval" type="int">4</configitem>
+			<configitem name="streamSwitchOnDisplayChange" type="bool">true</configitem>
+
+			<deviceClass name="funai_bdp">
+				<configitem name="clientIDPattern" type="string">^funai_bdp.*</configitem>
+			</deviceClass>
+
+			<deviceClass name="funai_bdp_5506">
+				<configitem name="clientIDPattern" type="string">^PHILIPS_E5WA0UD.*</configitem>
+			</deviceClass>
+
+			<deviceClass name="funai_tv1">
+				<configitem name="clientIDPattern" type="string">^PHILIPS_A1PFL95.*</configitem>
+			</deviceClass>
+
+			<deviceClass name="funai_tv2">
+				<configitem name="clientIDPattern" type="string">^PHILIPS_A2PFLA0.*</configitem>
+			</deviceClass>
+
+			<deviceClass name="funai_tv3">
+				<configitem name="clientIDPattern" type="string">^PHILIPS_A3PFLA5.*</configitem>
+			</deviceClass>
+
+		</deviceClass>
+
+		<deviceClass name="RokuDevice">
+			<configitem name="videoCodec" type="string">h264</configitem>
+			<configitem name="audioCodec" type="string">aac</configitem>
+			<configitem name="videoDropInterval" type="int">4</configitem>
+			<configitem name="audioDropInterval" type="int">4</configitem>
+
+			<deviceClass name="Roku2XS">
+				<configitem name="clientIDPattern" type="string">^Roku-3100X_.*</configitem>
+			</deviceClass>
+
+			<deviceClass name="Roku3">
+				<configitem name="clientIDPattern" type="string">^Roku-4200X_.*</configitem>
+			</deviceClass>
+
+		</deviceClass>
+
+	</deviceClass>
+
+<!-- BCD Transport -->
+
+<!-- device class for development clients, which receive logging information from the Series -->
+
+	<deviceClass name="StandardDevelopmentClient">
+		<configitem name="transport" type="string">http</configitem>
+		<configitem name="videoCodec" type="string">h264</configitem>
+		<configitem name="audioCodec" type="string">ac3</configitem>
+		<configitem name="initialIFrames" type="int">1</configitem>
+
+<!--  enable logging in Transport Stream -->
+
+		<configitem name="TSLogPID" type="int">68</configitem>
+
+<!-- 
+			Save the output stream to file. The following, optional, patterns can be used:
+			%S: replaced with session id
+			%D: replaced with current date + time in the following format: DD_MM_YY_HH_MM_SS
+			Example:
+			<configitem name="sessionDebug" type="string">%S_debug_%D.ts</configitem>
+-->
+
+		<deviceClass name="StandardDevelopmentHTTPClient">
+			<configitem name="clientIDPattern" type="string">^avplay.*</configitem>
+			<configitem name="encryptionTypes" type="string">vgdrm,clearkey</configitem>
+		</deviceClass>
+
+		<deviceClass name="MPEG2DevelopmentHTTPClient">
+			<configitem name="clientIDPattern" type="string">^mpeg2avplay.*</configitem>
+			<configitem name="videoCodec" type="string">mpeg2</configitem>
+			<configitem name="audioCodec" type="string">mp2</configitem>
+		</deviceClass>
+
+		<deviceClass name="StandardDevelopmentUDPClient">
+			<configitem name="transport" type="string">udp</configitem>
+		</deviceClass>
+
+		<deviceClass name="StandardDevelopmentCableClient">
+			<configitem name="transport" type="string">udp</configitem>
+			<configitem name="allocateResources" type="bool">true</configitem>
+		</deviceClass>
+
+		<deviceClass name="StandardRFBTVClient">
+			<configitem name="transport" type="string">http</configitem>
+			<configitem name="allocateResources" type="bool">false</configitem>
+			<configitem name="clientIDPattern" type="string">^rfbtv.*</configitem>
+
+<!-- 			Default value: 30000 ms, use "0" to disable
+				<configitem name="heartbeatInterval" type="int">30000</configitem>
+-->
+
+		</deviceClass>
+			
+		<deviceClass name="StandardRokuHTTPClient">
+			<configitem name="videoCodec" type="string">h264</configitem>
+			<configitem name="audioCodec" type="string">aac</configitem>
+			<configitem name="asamplerate" type="int">44100</configitem>
+			<configitem name="multi" type="string">1.0,0.6,0.4,0.25</configitem>
+ 
+			<configitem name="videoDropInterval" type="int">4</configitem>
+			<configitem name="audioDropInterval" type="int">4</configitem>
+
+			<deviceClass name="RokuHTTP">
+				<configitem name="clientIDPattern" type="string">^https-.*</configitem>
+			</deviceClass>
+
+			<deviceClass name="Roku_Players">
+				<configitem name="clientIDPattern" type="string">^Roku-.*</configitem>
+			</deviceClass>
+
+			<deviceClass name="Roku_Loadtest_Players">
+				<configitem name="clientIDPattern" type="string">^roku-load.*</configitem>
+			</deviceClass>
+
+		</deviceClass>
+
+		<deviceClass name="Activevideo-Worldbox-mips">
+			<configitem name="clientIDPattern" type="string">^ActiveVideo-Worldbox-mips.*</configitem>
+			<configitem name="videoCodec" type="string">mpeg2</configitem>
+
+<!--
+			<configitem name="audioCodec" type="string">aac</configitem>
+-->
+
+			<configitem name="audioCodec" type="string">ac3</configitem>
+			<configitem name="supportedDisplays" type="string">hd720</configitem>
+		</deviceClass>
+
+	</deviceClass>
+
+<!-- Development Clients -->
+
+  </deviceClasses>
+
+</CloudTVDevices>

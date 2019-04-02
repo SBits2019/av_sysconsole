@@ -1,0 +1,58 @@
+=========** CSM **===========
+/etc/opt/csm/deployment.xml
+-----------------------------
+<?xml version="1.0" encoding="utf-8"?>
+<CloudTVDeployment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.avnetworks.com/CloudTVDeployment">
+
+    <!--
+        CSM Deployment specification
+    -->
+
+    <!--
+        This section specifies the fixedStreams to be played when CSM is running.
+        Please refer to the documentation on how to configure CSM and LSM to enable fixedStream support.
+
+        A fixedStream has the following configuration settings:
+
+        clientId
+            A reference to a specific client in devices.xml. The client reference should define
+            at least UDP transport with allocateResources=false. Depending on program and destination
+            requirements, this may contain other optional settings.
+            This is an optional setting and defaults to fixedStreamClient.
+        program
+            A reference to a specific program to be played as a fixed stream.
+            Mandatory setting, no default.
+        targetIp
+            Destination IP address for a fixed stream.
+            Mandatory setting, no default
+        targetPort
+            A destination port address for a fixed stream.
+            Mandatory setting, no default
+        sgid
+            Service group to use for this stream. This is used for stitcher selection.
+            This requires clusterSelect set to "sgid" in the DownstreamPlugin settings in csm.xml.
+            This is an optional setting, no default.
+        clusterId
+            Cluster id to use for this stream. This is used for stitcher selection.
+            This requires clusterSelect set to "clusterId" in the DownstreamPlugin settings in csm.xml.
+            This is an optional setting, no default.
+        restart
+            Automatically restart the stream if it was stopped. This option is ignored if
+            the stop was triggered by an administrative termination of the session.
+            This is an optional setting and defaults to true.
+    -->
+<!--
+    <fixedStreams type="list">
+        <fixedStream>
+            <clientId>[client name]</clientId>
+            <program>[programs.xml reference]</program>
+            <targetIp>[IP address]</targetIp>
+            <targetPort>[port number]</targetPort>
+            <sgid>[service group id]</sgid>
+            <clusterId>[cluster id]</clusterId>
+            <restart>true</restart>
+        </fixedStream>
+    </fixedStreams>
+-->
+</CloudTVDeployment>

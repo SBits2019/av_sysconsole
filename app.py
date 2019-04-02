@@ -1,5 +1,5 @@
 #!/Users/pankaj/Projects/ActiveVideo/bin/python
-from flask import Flask, jsonify, render_template, url_for
+from flask import Flask, jsonify, render_template
 import json
 
 app = Flask(__name__)
@@ -36,6 +36,17 @@ def list_components():
 @app.route('/components/<detail_component>')
 def get_comp_attrs(detail_component):
     return render_template('comp_detail.html', component_files=get_configfiles(detail_component))
+
+
+@app.route('/components/<detail_component>/<detail_file>')
+def get_file_attrs(detail_component, detail_file):
+    for c in components:
+        for key, value in c.items():
+            if key == 'name' and value == detail_component:
+                files = c['config_files']
+                for i in files:
+                    if i['file_name'] == detail_file:
+                        return jsonify(i['attribute_modifications'])
 
 
 def get_configfiles(config_comp):
