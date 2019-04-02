@@ -1,15 +1,16 @@
 #!/Users/pankaj/Projects/ActiveVideo/bin/python
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, redirect, url_for
 import json
 
 app = Flask(__name__)
+
 
 # load json file
 with open('avchanges/json_AV-2.13.json') as f:
     data = json.load(f)
 
+#separate individual components from the json
 components = data['product']['components']
-
 
 @app.route('/')
 def home():

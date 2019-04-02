@@ -1,0 +1,10 @@
+
+#compos{
+    border: 3px solid cadetblue;
+    padding: 20px;
+    margin : 10px;
+}
+
+#comp_list{
+    list-style-image : url('/static/images/server_x_icon.png');
+}
