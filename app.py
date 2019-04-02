@@ -9,8 +9,9 @@ app = Flask(__name__)
 with open('avchanges/json_AV-2.13.json') as f:
     data = json.load(f)
 
-#separate individual components from the json
+# separate individual components from the json
 components = data['product']['components']
+
 
 @app.route('/')
 def home():
@@ -31,12 +32,9 @@ def list_components():
 
     comps = [(k, v) for k, v in data.items()]
 
-    return render_template('components.html', components=comps)
+    changed_comps = get_allconfigfiles()
 
-
-@app.route('/components/<detail_component>')
-def get_comp_attrs(detail_component):
-    return render_template('comp_detail.html', component_files=get_configfiles(detail_component))
+    return render_template('components.html', components=comps, changed_components=changed_comps)
 
 
 @app.route('/components/<detail_component>/<detail_file>')
@@ -55,6 +53,15 @@ def get_configfiles(config_comp):
         for key, value in comp.items():
             if key == 'name' and value == config_comp:
                 return [c['file_name'] for c in comp['config_files']]
+
+
+def get_allconfigfiles():
+    x = []
+    for comp in components:
+        for key, value in comp.items():
+            [x.append(c['file_name']) for c in comp['config_files']]
+
+    return x
 
 
 @app.route('/component_detail')
