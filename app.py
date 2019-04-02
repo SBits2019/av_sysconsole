@@ -1,4 +1,3 @@
-#!/Users/pankaj/Projects/ActiveVideo/bin/python
 from flask import Flask, jsonify, render_template, redirect, url_for
 import json
 
