@@ -13,8 +13,8 @@
             <li id='comp_list'>{{ comp[0] }}</li>
                     <ul> 
                         {% for i in comp[1] %}
-                            {% if i in changed_components %}
-                                <li><a href="url_for('get_file_attrs')">{{ i }}</a></li>
+                            {% if i in components%}
+                            <li><a href="{{ url_for('get_file_attrs', detail_component=comp[0], detail_file=i) }}">{{ i }}</a></li>
                             {% else %}
                                 <li>{{ i }}</li>
                             {% endif %}
