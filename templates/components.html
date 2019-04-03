@@ -14,12 +14,13 @@
                     <ul> 
                         {% for i in comp[1] %}
                             {% if i in changed_components %}
-                                <li><a href="">{{ i }}</a></li>
+                                <li><a href="url_for('get_file_attrs')">{{ i }}</a></li>
                             {% else %}
                                 <li>{{ i }}</li>
                             {% endif %}
                         {% endfor %}
                     </ul>
+                    <hr>
             {% endfor %}
         </ul>
     </div>
