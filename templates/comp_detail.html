@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Component
+File Details
 {% endblock %}
 
 {% block body %}
@@ -9,25 +9,24 @@
     <div class = 'col-sm-4'>
         <div id='compos'>
             <ul>
-                {% for comp in components %}
-                    <li id='comp_list'>{{ comp[0] }}</li>
+                {% for comp in components%}
+            <li id='comp_list'>{{ comp[0] }}</li>
                     <ul> 
                         {% for i in comp[1] %}
-                            {% if i in changed_components %}
-                                <li><a href="">{{ i }}</a></li>
+                            {% if i in changed_components%}
+                            <li><a href="{{ url_for('get_file_attrs', detail_component=comp[0], detail_file=i) }}">{{ i }}</a></li>
                             {% else %}
                                 <li>{{ i }}</li>
                             {% endif %}
                         {% endfor %}
-                        <hr>
                     </ul>
-                {% endfor %}
-            </ul>
-        </div>
+                    <hr>
+            {% endfor %}
+        </ul>
     </div>
-    
+</div>
 
-    <div class='col-sm-8'>
+    <div class='col-sm-6'>
         <h4>Modifications in {{ file_name }}</h4>
         <ol>
             <ul>

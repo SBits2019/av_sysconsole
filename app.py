@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, redirect, url_for
+from flask import Flask, jsonify, render_template
 import json
 
 app = Flask(__name__)
@@ -30,7 +30,7 @@ def list_components():
     changed_comps = [(k, v) for k, v in data.items()]
     # get all the configs
     all_files = get_allconfigfiles()
-    print(all_files)
+    # print(all_files)
 
     return render_template('components.html', changed_components=changed_comps, components=all_files)
 
@@ -49,8 +49,9 @@ def get_file_attrs(detail_component, detail_file):
                 files = c['config_files']
                 for i in files:
                     if i['file_name'] == detail_file:
-                        return render_template('comp_detail.html', attribute_modifications=i['attribute_modifications'],
-                                               file_name=i['file_name'], components=comps, 
+                        return render_template('comp_detail.html',
+                                               attribute_modifications=i['attribute_modifications'],
+                                               file_name=i['file_name'], components=comps,
                                                changed_components=changed_comps)
 
 
