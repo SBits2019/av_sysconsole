@@ -5,12 +5,41 @@
 {% endblock %}
 
 {% block body %}
-    <div>
-        <h4>XML's inside {{ c }}</h4>
+<div class='row'>
+    <div class = 'col-sm-4'>
+        <div id='compos'>
             <ul>
-                {% for file in component_files %}
-                    <li><a href="">{{ file }}</a></li>
+                {% for comp in components %}
+                    <li id='comp_list'>{{ comp[0] }}</li>
+                    <ul> 
+                        {% for i in comp[1] %}
+                            {% if i in changed_components %}
+                                <li><a href="">{{ i }}</a></li>
+                            {% else %}
+                                <li>{{ i }}</li>
+                            {% endif %}
+                        {% endfor %}
+                        <hr>
+                    </ul>
                 {% endfor %}
             </ul>
+        </div>
     </div>
+    
+
+    <div class='col-sm-8'>
+        <h4>Modifications in {{ file_name }}</h4>
+        <ol>
+            <ul>
+                {% for field in attribute_modifications %}
+                    <li><b>{{field['modification_type'] }}</b></li>
+                    <li><b> Attribute Name </b> : {{field['attribute_name'] }}</li>
+                    <li><b> Description</b> : {{field['attribute_description'] }}</li>
+                    <li><b> Default value</b> : {{field['default'] }}</li>
+                    <li><b> Explanation</b>  : {{ field['explanation_text'] }}</li>
+                {% endfor %}
+            </ul>
+        </ol>
+    </div>
+</div>
 {% endblock %}

@@ -24,7 +24,6 @@ def index():
 
 @app.route('/components')
 def list_components():
-
     with open('avchanges/component_files.json') as f:
         data = json.load(f)
     # get the configs in each component that have changes
@@ -38,13 +37,21 @@ def list_components():
 
 @app.route('/components/<detail_component>/<detail_file>')
 def get_file_attrs(detail_component, detail_file):
+
+    with open('avchanges/component_files.json') as f:
+        data = json.load(f)
+    comps = [(k, v) for k, v in data.items()]
+    changed_comps = get_allconfigfiles()
+
     for c in components:
         for key, value in c.items():
             if key == 'name' and value == detail_component:
                 files = c['config_files']
                 for i in files:
                     if i['file_name'] == detail_file:
-                        return jsonify(i['attribute_modifications'])
+                        return render_template('comp_detail.html', attribute_modifications=i['attribute_modifications'],
+                                               file_name=i['file_name'], components=comps, 
+                                               changed_components=changed_comps)
 
 
 def get_configfiles(config_comp):
