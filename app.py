@@ -4,11 +4,11 @@ import json
 app = Flask(__name__)
 
 
-#load json file
+# load json file
 with open('avchanges/json_AV-2.13.json') as f:
     data = json.load(f)
 
-#separate individual components from the json
+# separate individual components from the json
 components = data['product']['components']
 
 
@@ -24,17 +24,16 @@ def index():
 
 @app.route('/components')
 def list_components():
-    comps = []
 
     with open('avchanges/component_files.json') as f:
         data = json.load(f)
-    #get the configs in each component that have changes
+    # get the configs in each component that have changes
     changed_comps = [(k, v) for k, v in data.items()]
-    #get all the configs
+    # get all the configs
     all_files = get_allconfigfiles()
+    print(all_files)
 
     return render_template('components.html', changed_components=changed_comps, components=all_files)
-
 
 
 @app.route('/components/<detail_component>/<detail_file>')
@@ -48,7 +47,6 @@ def get_file_attrs(detail_component, detail_file):
                         return jsonify(i['attribute_modifications'])
 
 
-
 def get_configfiles(config_comp):
     for comp in components:
         for key, value in comp.items():
@@ -57,8 +55,12 @@ def get_configfiles(config_comp):
 
 
 def get_allconfigfiles():
+    x = []
     for comp in components:
-        return [c['file_name'] for c in comp['config_files']]
+        if 'config_files' in comp:
+            for c in comp['config_files']:
+                x.append(c['file_name'])
+    return x
 
 
 @app.route('/component_detail')
