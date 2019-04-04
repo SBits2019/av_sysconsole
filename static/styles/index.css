@@ -2,13 +2,16 @@
 #compos{
     border: 3px solid cadetblue;
     padding: 5px;
-    margin : 10%;
+    margin : 10px;
 }
 
 #comp_list{
     list-style-image : url('/static/images/server_x_icon.png');
 }
 
-.col-sm-6{
+#file_mods{
     border : 3px solid cadetblue;
+    padding: 5px;
+    margin : 10px;
+    padding-right: 5px;
 }

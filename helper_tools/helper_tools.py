@@ -30,7 +30,6 @@ def get_comp_dict():
                 comp_dict_new[f[0]] = [(i, False) for i in f[1]]
 
     comp_dict_final = {**comp_dict, **comp_dict_new}
-    print(comp_dict_final)
     return comp_dict_final
 
 

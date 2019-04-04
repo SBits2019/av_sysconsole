@@ -3,5 +3,5 @@
         "scaler": ["scaler-mgr.xml", "scales.xml", "cloudtv.conf", "topology.xml"],
         "stitcher": ["stitcher.xml", "cloudtv.conf", "udc.xml", "compositor.xml"],
         "csm": ["X11.xml","rfbtv.xml","launchmethods.xml","csm.xml", "devices.xml", "programs.xml", "cloudtv.conf", "topology.xml", "deployment.xml", "udc.xml", "MotorolaStandard.xml", "SAStandard.xml", "simulcrypt.xml"],
-        "psm": ["cloudtv.conf"]
+        "psm": ["cloudtv.conf","psm.xml"]
     }

@@ -10,7 +10,7 @@
     <div id='compos'>
         <ul>
             {% for k,v in changed_components.items() %}
-                <li>{{ k }}</li>
+                <li id="comp_list">{{ k }}</li>
                 <ul>
                     {% for i in v %}
                         {% if i[1] == True %}
@@ -23,6 +23,6 @@
             {% endfor %}
         </ul>
     </div>
-</div>
+    </div>
 </div>
 {% endblock %}
