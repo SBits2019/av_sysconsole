@@ -1,6 +1,7 @@
     {
-        "udcs": ["cloudtv.conf", "udc.xml"],
-        "scalermgrs": ["scaler-mgr.xml", "scales.xml", "cloudtv.conf", "topology.xml"],
-        "stitchers": ["stitcher.xml", "cloudtv.conf", "udc.xml", "compositor.xml"],
-        "csm": ["X11.xml","rfbtv.xml","launchmethods.xml","csm.xml", "devices.xml", "programs.xml", "cloudtv.conf", "topology.xml", "deployment.xml", "udc.xml", "MotorolaStandard.xml", "SAStandard.xml", "simulcrypt.xml"]
+        "udc": ["cloudtv.conf", "udc.xml"],
+        "scaler": ["scaler-mgr.xml", "scales.xml", "cloudtv.conf", "topology.xml"],
+        "stitcher": ["stitcher.xml", "cloudtv.conf", "udc.xml", "compositor.xml"],
+        "csm": ["X11.xml","rfbtv.xml","launchmethods.xml","csm.xml", "devices.xml", "programs.xml", "cloudtv.conf", "topology.xml", "deployment.xml", "udc.xml", "MotorolaStandard.xml", "SAStandard.xml", "simulcrypt.xml"],
+        "psm": ["cloudtv.conf"]
     }
