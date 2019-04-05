@@ -10,5 +10,12 @@
         <br>
         <br>
         <h3><a href="{{url_for('list_components')}}">Configuration Upgrade</a></h3>
+        <hr>
+        <h5>Summary of Changes</h5>
+        <ul>
+            {% for change in changes %}
+            <li>{{ change }}</li>
+            {% endfor %}
+        </ul>
     </div>
 {% endblock %}

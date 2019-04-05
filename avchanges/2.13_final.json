@@ -5,7 +5,7 @@
       "name": "CloudTv",
       "base_config_version": "2.11",
       "new_config_version": "2.13",
-      "summary_of_changes": "1.-Simulcrypt support for IP delivery 2.-Scale grouping 3.-Data Collector improvements 4.-reporting pipeline improvements 5.-RFB-TV plugin support for generating key repeatevents 6.-setting for control IP ofSession Manager member 7.-handling of videocapabilities of clients 8.-subscription logic from StreamingEngine to Scaler 9.-DataCollector HTTPS and proxy support",
+      "summary_of_changes": "1. Simulcrypt support for IP delivery -2. Scale grouping -3. Data Collector improvements -4. reporting pipeline improvements -5. RFBTV plugin support for generating key repeatevents -6. setting for control IP ofSession Manager member -7. handling of videocapabilities of clients -8. subscription logic from StreamingEngine to Scaler -9. DataCollector HTTPS and proxy support",
       "components": [
         {
           "name": "scaler",

@@ -24,7 +24,7 @@ def get_comp_dict():
         for f in all_files:
             if f[0] == key:
                 for elem in f[1]:
-                    if elem not in [x[0] for x in comp_dict[key]]:
+                    if elem not in [x[0] for x in comp_dict[key]]:                    
                         comp_dict[key].append((elem, False))
             elif f[0] not in comp_dict.keys():
                 comp_dict_new[f[0]] = [(i, False) for i in f[1]]
@@ -55,3 +55,12 @@ def get_attribute_modifications(comp_name, comp_file_name):
                 for i in files:
                     if i['file_name'] == comp_file_name:
                         return i['attribute_modifications']
+
+
+def get_summary():
+     return json_data['product']['summary_of_changes'].split('-')
+
+def get_version_details():
+    base = json_data['product']['base_config_version']
+    new = json_data['product']['new_config_version']
+    return (base, new)
